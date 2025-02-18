@@ -1,0 +1,8 @@
+<div>
+    {% for article in articles %}
+
+    <img src= {{ article.image }} alt={{ article.name }} width="250" height="200">
+    {{article.name}}
+    {{ article.price }} €
+    {% endfor %}
+</div>
