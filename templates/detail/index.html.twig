@@ -13,8 +13,8 @@
 
     <p><strong>Description :</strong> {{ article.description }}</p>
     <p><strong>Prix :</strong> {{ article.price }}€</p>
-    <p><strong>Vendeur :</strong> {{ article.CreatorId.email }}</p>
     <p><strong>Date de publication :</strong> {{ article.publicationDate|date('d/m/Y') }}</p>
+    <p><strong>Créé par :</strong> {{ article.CreatorID.email }}</p>
     <p><strong>Image :</strong> <img src="{{ asset('images/' ~ article.image) }}" alt="{{ article.name }}" /></p>
     
     <h3>Stock :</h3>
@@ -22,6 +22,14 @@
         <p>Quantité disponible : {{ article.stock.nbStock }}</p>
     {% else %}
         <p>Stock non disponible.</p>
+    {% endif %}
+
+    {% if app.user and app.user != article.creatorID %}
+        <form action="{{ path('app_add_to_cart', {id: article.id}) }}" method="POST">
+            <button type="submit">Ajouter au panier</button>
+        </form>
+    {% elseif app.user %}
+        <p>Vous ne pouvez pas ajouter votre propre article au panier.</p>
     {% endif %}
 </div>
 {% endblock %}
