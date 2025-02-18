@@ -15,28 +15,20 @@ class Cart
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $userID = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?Article $articleID = null;
+
+    #[ORM\ManyToOne(inversedBy: 'carts')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $UserID = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getUserID(): ?User
-    {
-        return $this->userID;
-    }
-
-    public function setUserID(User $userID): static
-    {
-        $this->userID = $userID;
-
-        return $this;
-    }
 
     public function getArticleID(): ?Article
     {
@@ -46,6 +38,18 @@ class Cart
     public function setArticleID(?Article $articleID): static
     {
         $this->articleID = $articleID;
+
+        return $this;
+    }
+
+    public function getUserID(): ?User
+    {
+        return $this->UserID;
+    }
+
+    public function setUserID(?User $UserID): static
+    {
+        $this->UserID = $UserID;
 
         return $this;
     }
