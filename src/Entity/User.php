@@ -3,99 +3,48 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Uid\Uuid;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ORM\Table(name: '`user`')]
-class User
+#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 32)]
-    private ?string $uid = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $username = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $password = null;
-
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 180)]
     private ?string $email = null;
 
+    /**
+     * @var list<string> The user roles
+     */
     #[ORM\Column]
-    private ?float $balance = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $ProfilPicture = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $role = null;
+    private array $roles = [];
 
     /**
-     * @var Collection<int, Article>
+     * @var string The hashed password
      */
-    #[ORM\OneToMany(targetEntity: Article::class, mappedBy: 'CreatorID')]
-    private Collection $createdArticles;
+    #[ORM\Column]
+    private ?string $password = null;
 
-    /**
-     * @var Collection<int, Invoice>
-     */
-    #[ORM\OneToMany(targetEntity: Invoice::class, mappedBy: 'userID')]
-    private Collection $invoices;
-
-    public function __construct()
-    {
-        $this->createdArticles = new ArrayCollection();
-        $this->invoices = new ArrayCollection();
-    }
+    #[ORM\Column(length: 32, unique: true)]
+    private ?string $uid = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
-
-    public function getUid(): ?string
+    public function __construct()
     {
-        return $this->uid;
+        $this->uid = Uuid::v4()->toRfc4122();
     }
-
-    public function setUid(string $uid): static
-    {
-        $this->uid = $uid;
-
-        return $this;
-    }
-
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): static
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): static
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
     public function getEmail(): ?string
     {
         return $this->email;
@@ -108,98 +57,71 @@ class User
         return $this;
     }
 
-    public function getBalance(): ?float
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
     {
-        return $this->balance;
+        return (string) $this->email;
     }
 
-    public function setBalance(float $balance): static
+    /**
+     * @see UserInterface
+     * @return list<string>
+     */
+    public function getRoles(): array
     {
-        $this->balance = $balance;
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
 
-        return $this;
+        return array_unique($roles);
     }
 
-    public function getProfilPicture(): ?string
+    /**
+     * @param list<string> $roles
+     */
+    public function setRoles(array $roles): static
     {
-        return $this->ProfilPicture;
-    }
-
-    public function setProfilPicture(string $ProfilPicture): static
-    {
-        $this->ProfilPicture = $ProfilPicture;
-
-        return $this;
-    }
-
-    public function getRole(): ?string
-    {
-        return $this->role;
-    }
-
-    public function setRole(string $role): static
-    {
-        $this->role = $role;
+        $this->roles = $roles;
 
         return $this;
     }
 
     /**
-     * @return Collection<int, Article>
+     * @see PasswordAuthenticatedUserInterface
      */
-    public function getCreatedArticles(): Collection
+    public function getPassword(): ?string
     {
-        return $this->createdArticles;
+        return $this->password;
     }
 
-    public function addCreatedArticle(Article $createdArticle): static
+    public function setPassword(string $password): static
     {
-        if (!$this->createdArticles->contains($createdArticle)) {
-            $this->createdArticles->add($createdArticle);
-            $createdArticle->setCreatorID($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCreatedArticle(Article $createdArticle): static
-    {
-        if ($this->createdArticles->removeElement($createdArticle)) {
-            // set the owning side to null (unless already changed)
-            if ($createdArticle->getCreatorID() === $this) {
-                $createdArticle->setCreatorID(null);
-            }
-        }
+        $this->password = $password;
 
         return $this;
     }
 
     /**
-     * @return Collection<int, Invoice>
+     * @see UserInterface
      */
-    public function getInvoices(): Collection
+    public function eraseCredentials(): void
     {
-        return $this->invoices;
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 
-    public function addInvoice(Invoice $invoice): static
+    public function getUid(): ?string
     {
-        if (!$this->invoices->contains($invoice)) {
-            $this->invoices->add($invoice);
-            $invoice->setUserID($this);
-        }
-
-        return $this;
+        return $this->uid;
     }
 
-    public function removeInvoice(Invoice $invoice): static
+    public function setUid(string $uid): static
     {
-        if ($this->invoices->removeElement($invoice)) {
-            // set the owning side to null (unless already changed)
-            if ($invoice->getUserID() === $this) {
-                $invoice->setUserID(null);
-            }
-        }
+        $this->uid = $uid;
 
         return $this;
     }
