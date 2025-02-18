@@ -33,21 +33,13 @@ class Invoice
     #[ORM\Column]
     private ?int $postCode = null;
 
+    #[ORM\ManyToOne(inversedBy: 'invoices')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $UserId = null;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getUserID(): ?User
-    {
-        return $this->userID;
-    }
-
-    public function setUserID(?User $userID): static
-    {
-        $this->userID = $userID;
-
-        return $this;
     }
 
     public function getTransactionDate(): ?\DateTimeInterface
@@ -106,6 +98,18 @@ class Invoice
     public function setPostCode(int $postCode): static
     {
         $this->postCode = $postCode;
+
+        return $this;
+    }
+
+    public function getUserId(): ?User
+    {
+        return $this->UserId;
+    }
+
+    public function setUserId(?User $UserId): static
+    {
+        $this->UserId = $UserId;
 
         return $this;
     }

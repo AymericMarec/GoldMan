@@ -28,13 +28,16 @@ class Article
 
     #[ORM\ManyToOne(inversedBy: 'createdArticles')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $CreatorID = null;
 
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
     #[ORM\OneToOne(mappedBy: 'articleID', cascade: ['persist', 'remove'])]
     private ?Stock $stock = null;
+
+    #[ORM\ManyToOne(inversedBy: 'articles')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $CreatorID = null;
 
     public function getId(): ?int
     {
@@ -89,17 +92,6 @@ class Article
         return $this;
     }
 
-    public function getCreatorID(): ?User
-    {
-        return $this->CreatorID;
-    }
-
-    public function setCreatorID(?User $CreatorID): static
-    {
-        $this->CreatorID = $CreatorID;
-
-        return $this;
-    }
 
     public function getImage(): ?string
     {
@@ -126,6 +118,18 @@ class Article
         }
 
         $this->stock = $stock;
+
+        return $this;
+    }
+
+    public function getCreatorID(): ?User
+    {
+        return $this->CreatorID;
+    }
+
+    public function setCreatorID(?User $CreatorID): static
+    {
+        $this->CreatorID = $CreatorID;
 
         return $this;
     }
