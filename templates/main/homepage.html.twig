@@ -1,0 +1,11 @@
+<div>
+
+    {% for article in articles %}
+    <img src= {{ article.image }} width="250" height="200">
+    {{article.name}}
+    {{article.price }} €
+    {% endfor %}
+    <a href="{{ path('app_register')}}"> register </a>
+    <a href="{{ path('login')}}"> login </a>
+    <publicationDate>
+</div>
