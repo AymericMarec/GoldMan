@@ -16,21 +16,18 @@ final class ArticleController extends AbstractController
     public function show(EntityManagerInterface $entityManager, int $id): Response
     {
         $visible_endless = true;
-        $first_endless = $entityManager->getRepository(Article::class)->findAll();
         $articles = array();
         for($ind = 9*$id; $ind < 9*($id+1); $ind++)
         {
-        if($ind != count($first_endless)-1)
-        {array_push($articles, $first_endless[$ind]);}
-        else{
-            $visible_endless = false;
-        break;
+            array_push($articles, $ind);
         }
-        }
+        $first_endless = $entityManager->getRepository(Article::class)->findby(array('id' => $articles));
+        if(count($articles) > count($first_endless))
+            {$visible_endless = false;}
         if($id <= 0){$visible_first = false;}
         else{$visible_first = true;}
         return $this->render('article/index.html.twig', [
-            'articles' => $articles,
+            'articles' => $first_endless,
             'visible_first' => $visible_first,
             'visible_endless' => $visible_endless,
             'id' => $id

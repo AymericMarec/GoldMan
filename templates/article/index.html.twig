@@ -1,9 +1,11 @@
 <div>
+
     {% for article in articles %}
     <img src= {{ article.image }} width="250" height="200">
     {{article.name}}
     {{article.price }} €
     {% endfor %}
+
     {%- if visible_first == true -%}
     <a href="{{ path('article_view', { 'id' : id - 1 })}}"> < </a>
     {% endif %}
