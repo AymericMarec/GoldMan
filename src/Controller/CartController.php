@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Cart;
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,12 +16,12 @@ final class CartController extends AbstractController
     #[Route('/cart', name: 'app_cart')]
     public function index(EntityManagerInterface $entityManager, Security $security): Response
     {
+        /** @var User $user */
         $user = $security->getUser();
         if (!$user) {
-            return $this->redirectToRoute('app_login');
+            return $this->redirectToRoute('login');
         }
-        $carts = $entityManager->getRepository(Cart::class)->findBy(['UserID' => $user]);
-
+        $carts = $user->getCarts();
         return $this->render('cart/index.html.twig', [
             'carts' => $carts,
         ]);
