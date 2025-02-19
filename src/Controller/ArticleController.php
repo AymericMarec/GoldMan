@@ -27,7 +27,7 @@ final class ArticleController extends AbstractController
         break;
         }
         }
-        if($articles[0] == $first_endless[0]){$visible_first = false;}
+        if($id <= 0){$visible_first = false;}
         else{$visible_first = true;}
         return $this->render('article/index.html.twig', [
             'articles' => $articles,
