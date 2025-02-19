@@ -2,24 +2,20 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\ORM\EntityManagerInterface;
 
-class Home extends AbstractController
+final class Home extends AbstractController
 {
-    #[Route('/')]
-    public function homepage(): Response
-    {
-
-        $Article = [
-            'name' => 'Projet Lapine',
-            'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHN_UOzvswcq9OhJUivaRDddRBqeXu5IzhSttBGW7nwNxAmPD6kr6S4McG43T3vJTpH10&usqp=CAU',
-            'price' => 0,
-            'vendor' => 'Bronya'
-        ];
+    #[Route('/', name: 'home')]
+    public function homepage(EntityManagerInterface $entityManager): Response
+    {  
+        $first_endless = $entityManager->getRepository(Article::class)->findby(array(),array('id'=>'DESC'),4);
         return $this->render('main/homepage.html.twig', [
-            'Article' => $Article,
+            'articles' => $first_endless,
         ]);
     }
 }
