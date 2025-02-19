@@ -1,12 +1,13 @@
 <div>
     {% for article in articles %}
-    <img src= {{ articles[article.id].image }} width="250" height="200">
-    {{articles[article.id].name}}
-    {{articles[article.id].price }} €
+    <img src= {{ article.image }} width="250" height="200">
+    {{article.name}}
+    {{article.price }} €
     {% endfor %}
-
-    {%- if articles|length <= 9 -%}
-    <button type="button" onclick=> < </button>
-    <button type="button" onclick=> > </button>
+    {%- if visible_first == true -%}
+    <a href="{{ path('article_view', { 'id' : id - 1 })}}"> < </a>
+    {% endif %}
+    {%- if visible_endless == true -%}
+    <a href="{{ path('article_view', { 'id' : id + 1 })}}"> > </a>
     {% endif %}
 </div>
