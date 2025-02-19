@@ -14,10 +14,10 @@ use Symfony\Bundle\SecurityBundle\Security;
 
 final class DetailController extends AbstractController
 {
-    #[Route('/detail/{id}', name: 'app_detail')]
-    public function index(int $id, EntityManagerInterface $entityManager, Security $security): Response
+    #[Route('/detail/{uid}', name: 'app_detail')]
+    public function index(string $uid, EntityManagerInterface $entityManager, Security $security): Response
     {
-        $article = $entityManager->getRepository(Article::class)->find($id);
+        $article = $entityManager->getRepository(Article::class)->findOneBy(['uid' => $uid]);
 
         if (!$article) {
             throw $this->createNotFoundException('Article not found');
