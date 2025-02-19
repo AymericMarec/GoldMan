@@ -10,12 +10,15 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class ArticleController extends AbstractController
 {
-
-    #[Route('/article', name: 'article_view')]
-    public function show(EntityManagerInterface $entityManager): Response
+    #[Route('/article/{index}', name: 'article_view')]
+    public function show(EntityManagerInterface $entityManager, int $index): Response
     {
-        $id = 0;
-        $articles = $entityManager->getRepository(Article::class)->findAll();
+        $article_page = array();
+        for($ind = 0; $ind < 9; $ind++)
+        {
+            array_push($article_page, $ind + (9 * $index));
+        }
+        $articles = $entityManager->getRepository(Article::class)->findBy(array('id' => $article_page));
         return $this->render('article/index.html.twig', [
             'articles' => $articles,
         ]);

@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Panier{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Votre Panier</h1>
+
+    {% if app.user %}
+        {% if carts is not empty %}
+            <h2>Articles dans votre panier :</h2>
+            <ul>
+                {% for cart in carts %}
+                    <li>
+                        <strong>{{ cart.articleID.name }}</strong><br>
+                        Description : {{ cart.articleID.description }}<br>
+                        Prix : €{{ cart.articleID.price }}<br>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Votre panier est vide.</p>
+        {% endif %}
+    {% else %}
+        <p>Vous devez être connecté pour voir votre panier.</p>
+    {% endif %}
+</div>
+{% endblock %}
