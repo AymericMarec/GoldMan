@@ -3,5 +3,34 @@
 {% block title %}Hello AccountController!{% endblock %}
 
 {% block body %}
-
+    <form method="post" accept-charset="UTF-8">
+        <p>nouveau mail</p> 
+        <input type="email" name="email" required>
+        <input type="hidden" name="type" value="email">
+        <input type="submit" value="submit">
+    </form>
+    <form method="post" accept-charset="UTF-8">
+        <p>nouveau mdp</p> 
+        <input type="password" name="password" required>
+        <input type="hidden" name="type" value="password">
+        <input type="submit" value="submit">
+    </form>
+    <form method="post" accept-charset="UTF-8">
+        <p>nouveau username</p> 
+        <input type="text" name="username" required>
+        <input type="hidden" name="type" value="username">
+        <input type="submit" value="submit">
+    </form>
+    <form method="post" accept-charset="UTF-8">
+        <p>nouveau profilePicture</p> 
+        <input type="text" name="profilePicture" required>
+        <input type="hidden" name="type" value="profilePicture">
+        <input type="submit" value="submit">
+    </form>
+    <form method="post" accept-charset="UTF-8">
+        <p>ajouter argent</p> 
+        <input type="number" name="balance" required>
+        <input type="hidden" name="type" value="balance">
+        <input type="submit" value="submit">
+    </form>
 {% endblock %}
