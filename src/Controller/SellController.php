@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Entity\Article;
 use \Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Uid\Uuid;
 final class SellController extends AbstractController{
     #[Route('/sell', name: 'SellPage',methods: 'GET')]
     public function index(): Response
@@ -26,6 +27,7 @@ final class SellController extends AbstractController{
         $article->setDescription($request->request->get('description'));
         $article->setPrice($request->request->get('price'));
         $article->setPublicationDate(new \DateTime());
+        $article->setUid(Uuid::v4()->toRfc4122());
         $article->setImage("");
         $entityManager->persist($article);
         $entityManager->flush();
