@@ -1,8 +1,13 @@
 <div>
     {% for article in articles %}
-
-    <img src= {{ article.image }} alt={{ article.name }} width="250" height="200">
-    {{article.name}}
-    {{ article.price }} €
+    <img src= {{ articles[article.id].image }} width="250" height="200">
+    {{articles[article.id].name}}
+    {{articles[article.id].price }} €
     {% endfor %}
+
+    <var>id = 0</var>
+    {%- if articles|length <= 9 -%}
+    <button type="button" onclick=<var>id++</var>> <var>id</var> </button>
+    <button type="button" onclick="Page_index()">></button>
+    {% endif %}
 </div>
