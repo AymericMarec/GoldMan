@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+<h1>All users</h1>
+<ul>
+    {% for user in users %}
+        <div>
+            <li>{{ user.username }}</li>
+            <li>{{ user.email }}</li>
+            <li>{{ user.roles[0] }}</li>
+            <div>
+            <button data-uid={{user.uid}} onclick="SwitchAdmin(this)">{% if user.roles[0]=="ROLE_ADMIN" %}- Admin{% else %}+ Admin{% endif %}</button>
+            <button data-uid={{user.uid}} onclick="Delete(this)">Supprimer</button>
+            </div>
+        </div>
+    {% endfor %}
+</ul>
+<script src="{{ asset('js/user.js') }}"></script>
+{% endblock %}

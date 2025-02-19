@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+<h1>All articles</h1>
+<ul>
+    {% for article in articles %}
+        <div>
+            <li>{{ article.name }}</li>
+            <li>{{ article.description }}</li>
+            <li>{{ article.price }}</li>
+            <div>
+            <button data-uid={{user.uid}} onclick="Delete(this)">Supprimer</button>
+            </div>
+        </div>
+    {% endfor %}
+</ul>
+<script src="{{ asset('js/articlesGestion.js') }}"></script>
+{% endblock %}
