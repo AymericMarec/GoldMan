@@ -39,6 +39,9 @@ class Article
     #[ORM\JoinColumn(nullable: false)]
     private ?User $CreatorID = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $uid = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -130,6 +133,18 @@ class Article
     public function setCreatorID(?User $CreatorID): static
     {
         $this->CreatorID = $CreatorID;
+
+        return $this;
+    }
+
+    public function getUid(): ?string
+    {
+        return $this->uid;
+    }
+
+    public function setUid(string $uid): static
+    {
+        $this->uid = $uid;
 
         return $this;
     }

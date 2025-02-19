@@ -282,4 +282,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+    public function SwitchRole(){
+        if($this->roles == ["ROLE_USER"]){
+            $this->roles = ["ROLE_ADMIN"];
+        }else {
+            $this->roles = ["ROLE_USER"];
+        }
+        return $this;
+    }
 }

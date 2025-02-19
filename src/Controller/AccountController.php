@@ -31,6 +31,7 @@ final class AccountController extends AbstractController{
         if ($user == null) {
             return $this->redirectToRoute('login');
         }
+        $email = $user->getEmail();
         $articles = $user->getArticles();
         $bills = $user->getInvoices();
         //Load Page with UserInfo
