@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -47,5 +48,14 @@ final class AdminController extends AbstractController{
         return $this->render('admin/article.html.twig', [
             'articles' => $articles
         ]);
+    }
+    #[Route('/admin/article', name: 'DeleteArticle',methods:'DELETE')]
+    public function DeleteArticle(EntityManagerInterface $em,Request $request): Response
+    {
+        $uid = $request->query->get('uid');
+        $user = $em->getRepository(Article::class)->findOneBy(['uid' => $uid]);
+        $em->remove($user);
+        $em->flush();
+        return new Response("OK");
     }
 }
