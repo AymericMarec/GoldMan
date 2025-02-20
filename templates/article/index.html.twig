@@ -1,9 +1,10 @@
 <div>
 
     {% for article in articles %}
-    <img src= {{ article.image }} width="250" height="200">
+    <img src= {{ article.image }} width="250" height="200"">
     {{article.name}}
     {{article.price }} €
+    <a href="{{ path('app_detail', { 'uid' : article.uid })}}"> detail </a>
     {% endfor %}
 
     {%- if visible_first == true -%}
