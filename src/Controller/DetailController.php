@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\Cart;
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -15,31 +16,36 @@ use Symfony\Bundle\SecurityBundle\Security;
 final class DetailController extends AbstractController
 {
     #[Route('/detail/{uid}', name: 'app_detail')]
-    public function index(string $uid, EntityManagerInterface $entityManager, Security $security): Response
+    public function index(string $uid, EntityManagerInterface $entityManager): Response
     {
         $article = $entityManager->getRepository(Article::class)->findOneBy(['uid' => $uid]);
 
         if (!$article) {
             throw $this->createNotFoundException('Article not found');
         }
-
-        $user = $security->getUser();
-
+        /** @var User $user */
+        $user = $this->getUser();
+        if($article->getCreatorID()->getId() == $user->getId() || in_array("ROLE_ADMIN",$user->getRoles())){
+            $editable = true;
+        }else {
+            $editable = false;
+        }
         return $this->render('detail/index.html.twig', [
             'article' => $article,
             'user' => $user,
+            "editable"=> $editable
         ]);
     }
 
-    #[Route('/detail/{id}/add-to-cart', name: 'app_add_to_cart')]
-    public function addToCart(int $id, EntityManagerInterface $entityManager, Security $security): RedirectResponse
+    #[Route('/detail/{uid}/add-to-cart', name: 'app_add_to_cart')]
+    public function addToCart(string $uid, EntityManagerInterface $entityManager): RedirectResponse
     {
-        $user = $security->getUser();
+        $user = $this->getUser();
         if (!$user) {
             return $this->redirectToRoute('app_login');
         }
 
-        $article = $entityManager->getRepository(Article::class)->find($id);
+        $article = $entityManager->getRepository(Article::class)->findOneBy(['uid' => $uid]);
 
         if (!$article) {
             throw $this->createNotFoundException('Article not found');
@@ -47,7 +53,7 @@ final class DetailController extends AbstractController
 
         if ($user === $article->getCreatorID()) {
             $this->addFlash('error', 'Vous ne pouvez pas ajouter votre propre article au panier.');
-            return $this->redirectToRoute('app_detail', ['id' => $id]);
+            return $this->redirectToRoute('app_detail', ['uid' => $uid]);
         }
 
         $cart = new Cart();
@@ -59,6 +65,6 @@ final class DetailController extends AbstractController
 
         $this->addFlash('success', 'L\'article a été ajouté à votre panier.');
 
-        return $this->redirectToRoute('app_detail', ['id' => $id]);
+        return $this->redirectToRoute('app_detail', ['uid' => $uid]);
     }
 }

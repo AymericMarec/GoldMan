@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Panier{% endblock %}
+
+{% block body %}
+{% if canBuy %}
+<div>
+    <form method="post" accept-charset="UTF-8">
+        <p>Ville</p>
+        <input type="text" name="city">
+        <p>Adresse</p>
+        <input type="text" name="adress">
+        <p>Code Postal</p>
+        <input type="number" name="postalCode">
+        <input type="submit">
+    </form>
+</div>
+{% else %}
+<div>
+    <h1>Solde insuffisant</h1>
+</div>
+{% endif %}
+
+{% endblock %}

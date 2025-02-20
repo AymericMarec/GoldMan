@@ -9,14 +9,17 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Détails de l'article "{{ article.name }}"</h1>
+    <h1>Détails de l'article " <a {% if editable %}contenteditable="true"{% endif %} id="name">{{ article.name }}</a>"</h1>
 
-    <p><strong>Description :</strong> {{ article.description }}</p>
-    <p><strong>Prix :</strong> {{ article.price }}€</p>
+    <p><strong>Description :</strong><a {% if editable %}contenteditable="true"{% endif %} id="description"> {{ article.description }}</a></p>
+    <p><strong>Prix :</strong> <a {% if editable %}contenteditable="true"{% endif %} id="price">{{ article.price }}</a>€</p>
     <p><strong>Date de publication :</strong> {{ article.publicationDate|date('d/m/Y') }}</p>
     <p><strong>Créé par :</strong> {{ article.CreatorID.email }}</p>
     <p><strong>Image :</strong> <img src="{{ asset('images/' ~ article.image) }}" alt="{{ article.name }}" /></p>
-    
+    <button id="save" style="display:none;" data-uid={{article.uid}} onclick="Save()">Save</button>
+    {% if editable %}
+        <button id="delete" data-uid={{article.uid}} onclick="Delete(this)">Delete</button>
+    {% endif %}
     <h3>Stock :</h3>
     {% if article.stock %}
         <p>Quantité disponible : {{ article.stock.nbStock }}</p>
@@ -25,11 +28,12 @@
     {% endif %}
 
     {% if app.user and app.user != article.creatorID %}
-        <form action="{{ path('app_add_to_cart', {id: article.id}) }}" method="POST">
+        <form action="{{ path('app_add_to_cart', {uid: article.uid}) }}" method="POST">
             <button type="submit">Ajouter au panier</button>
         </form>
     {% elseif app.user %}
         <p>Vous ne pouvez pas ajouter votre propre article au panier.</p>
     {% endif %}
+    <script src="{{ asset('js/editArticleGestion.js') }}"></script>
 </div>
 {% endblock %}

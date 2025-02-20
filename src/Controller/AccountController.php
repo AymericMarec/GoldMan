@@ -17,6 +17,10 @@ final class AccountController extends AbstractController{
     public function index(Request $request,UserRepository $userRepository): Response
     {
         $userToShow = $request->query->get('uid');
+        $user = $this->getUser();
+        if (!$user) {
+            return $this->redirectToRoute('login');
+        }
         if($userToShow == null){
             return $this->ShowUser();
         }else {
@@ -28,9 +32,7 @@ final class AccountController extends AbstractController{
     public function ShowUser():Response{
         /** @var User $user */
         $user = $this->getUser();
-        if ($user == null) {
-            return $this->redirectToRoute('login');
-        }
+
         $email = $user->getEmail();
         $articles = $user->getArticles();
         $bills = $user->getInvoices();
@@ -41,7 +43,7 @@ final class AccountController extends AbstractController{
     }
     public function ShowOtherUser($uid,UserRepository $userRepository):Response{
         $user = $userRepository->findOneBy(['uid' => $uid]);
-        if($user === null){
+        if(!$user){
             //Load Error page , user doesnt exist
         }
         //Load Page with OtherUserInfo
@@ -55,7 +57,7 @@ final class AccountController extends AbstractController{
     {
         /** @var User $user */
         $user = $this->getUser();
-        if ($user == null) {
+        if (!$user) {
             return $this->ShowUser();
         }
         $formType = $request->request->get('type');

@@ -16,6 +16,10 @@ final class SellController extends AbstractController{
     #[Route('/sell', name: 'SellPage',methods: 'GET')]
     public function index(): Response
     {
+        $user = $this->getUser();
+        if(!$user){
+            return $this->redirectToRoute('login');
+        }
         return $this->render('sell/index.html.twig', [
             'controller_name' => 'SellController',
         ]);
