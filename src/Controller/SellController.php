@@ -36,6 +36,7 @@ final class SellController extends AbstractController{
         $article->setPublicationDate(new \DateTime());
         $article->setUid(Uuid::v4()->toRfc4122());
         $article->setImage("");
+        $entityManager->persist($article);
         $entityManager->flush();
         return $this->render('sell/index.html.twig', [
             'controller_name' => 'SellController',
