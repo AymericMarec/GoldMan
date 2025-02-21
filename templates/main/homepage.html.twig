@@ -5,8 +5,8 @@
     {{article.name}}
     {{article.price }} €
     {% endfor %}
-    <a href="{{ path('app_register')}}"> register </a>
-    <a href="{{ path('login')}}"> login </a>
+    <a href="{{ path('app_register')}}"> {{ 'register'|trans({}, 'home_page')|raw }} </a>
+    <a href="{{ path('login')}}"> {{ 'login'|trans({}, 'home_page')|raw }} </a>
     <form method="post" accept-charset="UTF-8" action="/search">
         <input type="text" name="search" placeholder="recherche">
         <input type="submit">
