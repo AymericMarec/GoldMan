@@ -53,7 +53,7 @@ public function CreateArticle(
     Request $request,
     EntityManagerInterface $entityManager,
     SluggerInterface $slugger,
-    #[Autowire('%kernel.project_dir%/public/uploads/image')] string $imageDirectory
+    #[Autowire('%kernel.project_dir%/public/uploads/images')] string $imageDirectory
 ): Response
 {
     $article = new Article();

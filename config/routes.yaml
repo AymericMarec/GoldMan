@@ -6,9 +6,9 @@ controllers:
     type: attribute
 
 # Supprimez complètement cette partie qui force la redirection vers /en
-# root_route_redirect:
-#     path: /
-#     controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController
-#     defaults:
-#         path: /en
-#         permanent: true
+root_route_redirect:
+    path: /
+    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController
+    defaults:
+        path: /fr
+        permanent: true

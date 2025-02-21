@@ -14,10 +14,10 @@
             <source src="{{ asset('video/VideoMenu.mp4') }}" type="video/mp4">
         </video>
         <div class="search-container">
-            <h1>Découvrez l'Excellence</h1>
+            {{ 'main'|trans({}, 'home_page')|raw }}
             <div class="search-bar">
-                <input type="text" class="search-input" placeholder="Rechercher un article...">
-                <button class="search-button">Rechercher</button>
+                <input type="text" class="search-input" placeholder={{ 'bar'|trans({}, 'home_page')|raw }}>
+                <button class="search-button">{{ 'search'|trans({}, 'home_page')|raw }}</button>
             </div>
         </div>
     </section>
@@ -25,8 +25,8 @@
     {% if articles is not empty %}
         <section class="products-section">
             <div class="section-header">
-                <h2 class="section-title">Dernières Nouveautés</h2>
-                <a href="{{ path('article_view', {'id': 1}) }}" class="view-all">Voir tous les articles</a>
+                <h2 class="section-title">{{ 'new'|trans({}, 'home_page')|raw }}</h2>
+                <a href="{{ path('article_view', {'id': 1}) }}" class="view-all">{{ 'view'|trans({}, 'home_page')|raw }}</a>
             </div>
             <div class="products-grid">
                 {% for article in articles|slice(0, 4) %}
@@ -38,7 +38,7 @@
                             <h3 class="product-name">{{ article.name }}</h3>
                             <p class="product-price">{{ article.price }} €</p>
                             <p class="product-date">{{ article.publicationDate|date('d/m/Y') }}</p>
-                            <a href="{{ path('app_detail', {'uid': article.uid}) }}" class="view-button">Découvrir</a>
+                            <a href="{{ path('app_detail', {'uid': article.uid}) }}" class="view-button">{{ 'discover'|trans({}, 'home_page')|raw }}</a>
                         </div>
                     </div>
                 {% endfor %}

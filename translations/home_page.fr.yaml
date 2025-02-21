@@ -2,3 +2,33 @@ login:
   "Connexion"
 register:
   "S'enregistrer"
+main:
+  "<h1>Découvrez l'Excellence</h1>"
+discover:
+  "Découvrir"
+new:
+  "Dernières Nouveautés"
+bar:
+  "Rechercher un article..."
+search:
+  "Rechercher"
+view:
+  "Voir tous les articles"
+luxe:
+  "L'Excellence du Luxe"
+commitment:
+  "Notre engagement"
+concierge:
+  "Service Conciergerie"
+delivery:
+  "Livraison Personnalisée"
+excellence:
+  "Garantie D'excellence"
+all rights reserved:
+  "© 2024 GOLDMAN - L'Art du Luxe. Tous droits réservés."
+account:
+  "Mon Compte"
+cart:
+  "mon Panier"
+disconnect:
+  "déconnexion"

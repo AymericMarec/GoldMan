@@ -22,12 +22,19 @@ class ArticleFormType extends AbstractType
             ->add('description')
             ->add('price')
             ->add('image', FileType::class, [
-                'label' => 'Image (jpg, png)',
+                'label' => 'Image (jpg, png, jpeg, webp, gif)',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
                     new File(
-                        maxSize: '1024k',
+                        maxSize: '4096k',
+                        mimeTypes: [
+                            'image/jpg',
+                            'image/png',
+                            'image/jpeg',
+                            'image/webp',
+                            'image/gif',
+                        ],
                         mimeTypesMessage: 'Please upload a valid Image.',
                     )],])
                     ->add('stock', EntityType::class, [
