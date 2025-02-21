@@ -33,12 +33,13 @@ final class AccountController extends AbstractController{
         /** @var User $user */
         $user = $this->getUser();
 
-        $email = $user->getEmail();
         $articles = $user->getArticles();
         $bills = $user->getInvoices();
         //Load Page with UserInfo
         return $this->render('account/index.html.twig', [
-            'controller_name' => 'AccountController',
+            'user' =>$user,
+            'articles' =>$articles,
+            'bills' =>$bills,
         ]);
     }
     public function ShowOtherUser($uid,UserRepository $userRepository):Response{
@@ -46,9 +47,11 @@ final class AccountController extends AbstractController{
         if(!$user){
             //Load Error page , user doesnt exist
         }
+        $articles = $user->getArticles();
         //Load Page with OtherUserInfo
-        return $this->render('account/index.html.twig', [
-            'controller_name' => 'AccountController',
+        return $this->render('account/view.html.twig', [
+            'user' => $user,
+            'articles' => $articles
         ]);
     }
 

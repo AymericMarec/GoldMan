@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}GOLDMAN - Profil de {{ user.username }}{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/header.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/account.css') }}">
+{% endblock %}
+
+{% block body %}
+    {% include 'partials/header.html.twig' %}
+
+    <main class="account-page">
+        <div class="account-container">
+            <div class="account-header">
+                <div class="profile-image">
+                    <img src="{{ asset('images/' ~ user.profilePicture) }}" alt="Photo de profil">
+                </div>
+                <h1>{{ user.username }}</h1>
+                <p class="user-email">{{ user.email }}</p>
+            </div>
+
+            <section class="account-section">
+                <h2>Articles Publiés par {{ user.username }}</h2>
+                <div class="articles-grid">
+                    {% for article in articles %}
+                        <div class="article-card">
+                            <img src="{{ asset('images/' ~ article.image) }}" alt="{{ article.name }}">
+                            <div class="article-info">
+                                <h3>{{ article.name }}</h3>
+                                <p class="price">{{ article.price }}€</p>
+                                <a href="{{ path('app_detail', {'uid': article.uid}) }}" class="view-button">Voir</a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <p class="no-articles">Cet utilisateur n'a pas encore publié d'articles.</p>
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
+    </main>
+
+    {% include 'partials/footer.html.twig' %}
+{% endblock %} 

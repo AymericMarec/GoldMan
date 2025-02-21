@@ -1,12 +1,14 @@
+# Commentez ou supprimez si présent :
 controllers:
     resource:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
 
-root_route_redirect:
-    path: /
-    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController
-    defaults:
-        path: /en
-        permanent: true
+# Supprimez complètement cette partie qui force la redirection vers /en
+# root_route_redirect:
+#     path: /
+#     controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController
+#     defaults:
+#         path: /en
+#         permanent: true

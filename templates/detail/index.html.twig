@@ -1,39 +1,77 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Détails de l'article{% endblock %}
+{% block title %}GOLDMAN - {{ article.name }}{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/header.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/detail.css') }}">
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    {% include 'partials/header.html.twig' %}
 
-<div class="example-wrapper">
-    <h1>Détails de l'article " <a {% if editable %}contenteditable="true"{% endif %} id="name">{{ article.name }}</a>"</h1>
+    <main class="detail-page">
+        <div class="detail-container">
+            <div class="article-image">
+                <img src="{{ asset('images/' ~ article.image) }}" alt="{{ article.name }}">
+            </div>
 
-    <p><strong>Description :</strong><a {% if editable %}contenteditable="true"{% endif %} id="description"> {{ article.description }}</a></p>
-    <p><strong>Prix :</strong> <a {% if editable %}contenteditable="true"{% endif %} id="price">{{ article.price }}</a>€</p>
-    <p><strong>Date de publication :</strong> {{ article.publicationDate|date('d/m/Y') }}</p>
-    <p><strong>Créé par :</strong> {{ article.CreatorID.email }}</p>
-    <p><strong>Image :</strong> <img src="{{ asset('images/' ~ article.image) }}" alt="{{ article.name }}" /></p>
-    <button id="save" style="display:none;" data-uid={{article.uid}} onclick="Save()">Save</button>
-    {% if editable %}
-        <button id="delete" data-uid={{article.uid}} onclick="Delete(this)">Delete</button>
-    {% endif %}
-    <h3>Stock :</h3>
-    {% if article.stock %}
-        <p>Quantité disponible : {{ article.stock.nbStock }}</p>
-    {% else %}
-        <p>Stock non disponible.</p>
-    {% endif %}
+            <div class="article-info">
+                <h1 class="article-title">
+                    <span {% if editable %}contenteditable="true"{% endif %} id="name">{{ article.name }}</span>
+                </h1>
 
-    {% if app.user and app.user != article.creatorID %}
-        <form action="{{ path('app_add_to_cart', {uid: article.uid}) }}" method="POST">
-            <button type="submit">Ajouter au panier</button>
-        </form>
-    {% elseif app.user %}
-        <p>Vous ne pouvez pas ajouter votre propre article au panier.</p>
-    {% endif %}
+                <div class="article-meta">
+                    <p>Publié le {{ article.publicationDate|date('d/m/Y') }}</p>
+                    <p>Par {{ article.CreatorID.email }}</p>
+                </div>
+
+                <div class="article-description">
+                    <h2>Description</h2>
+                    <p {% if editable %}contenteditable="true"{% endif %} id="description">{{ article.description }}</p>
+                </div>
+
+                <div class="article-price">
+                    <span {% if editable %}contenteditable="true"{% endif %} id="price">{{ article.price }}</span> €
+                </div>
+
+                <div class="article-stock">
+                    <h3>Stock</h3>
+                    {% if article.stock %}
+                        <p>Quantité disponible : {{ article.stock.nbStock }}</p>
+                    {% else %}
+                        <p>Stock non disponible.</p>
+                    {% endif %}
+                </div>
+
+                <div class="article-actions">
+                    {% if app.user and app.user != article.creatorID %}
+                        <form action="{{ path('app_add_to_cart', {uid: article.uid}) }}" method="POST">
+                            <button type="submit" class="add-to-cart-button">Ajouter au panier</button>
+                        </form>
+                    {% elseif app.user %}
+                        <p class="warning-message">Vous ne pouvez pas ajouter votre propre article au panier.</p>
+                    {% endif %}
+
+                    {% if editable %}
+                        <div class="edit-actions">
+                            <button id="save" class="save-button" style="display:none;" data-uid={{article.uid}} onclick="Save()">
+                                <i class="fas fa-save"></i> Sauvegarder
+                            </button>
+                            <button id="delete" class="delete-button" data-uid={{article.uid}} onclick="Delete(this)">
+                                <i class="fas fa-trash"></i> Supprimer
+                            </button>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </main>
+
+    {% include 'partials/footer.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
     <script src="{{ asset('js/editArticleGestion.js') }}"></script>
-</div>
 {% endblock %}

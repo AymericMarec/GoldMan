@@ -1,0 +1,240 @@
+.detail-page {
+    min-height: 100vh;
+    background: #000;
+    padding: 120px 2rem 4rem;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.detail-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    background: rgba(17, 17, 17, 0.95);
+    border-radius: 8px;
+    border: 1px solid #222;
+    padding: 3rem;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+}
+
+.article-image {
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.article-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.article-info {
+    color: #fff;
+}
+
+.article-title {
+    color: #d4af37;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.article-meta {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.article-meta p {
+    margin: 0.5rem 0;
+}
+
+.article-description {
+    margin-bottom: 2rem;
+}
+
+.article-description h2 {
+    color: #d4af37;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.article-description p {
+    line-height: 1.6;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.article-price {
+    font-size: 2rem;
+    color: #d4af37;
+    font-family: 'Cormorant Garamond', serif;
+    margin: 2rem 0;
+    font-weight: 600;
+}
+
+.article-stock {
+    margin-bottom: 2rem;
+}
+
+.article-stock h3 {
+    color: #d4af37;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.article-stock p {
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.article-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.add-to-cart-button {
+    width: 100%;
+    padding: 1rem;
+    background: #d4af37;
+    border: none;
+    border-radius: 4px;
+    color: #000;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.add-to-cart-button:hover {
+    background: #c4a032;
+    transform: translateY(-2px);
+}
+
+.warning-message {
+    color: #dc3545;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    padding: 1rem;
+    background: rgba(220, 53, 69, 0.1);
+    border-radius: 4px;
+}
+
+.edit-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.save-button {
+    display: none;
+    background: #28a745;
+    color: #fff;
+    border: none;
+    flex: 1;
+    padding: 0.8rem;
+    border-radius: 4px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.save-button:hover {
+    background: #218838;
+    transform: translateY(-2px);
+}
+
+.delete-button {
+    flex: 1;
+    padding: 0.8rem;
+    border-radius: 4px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: transparent;
+    color: #dc3545;
+    border: 1px solid #dc3545;
+}
+
+.delete-button:hover {
+    background: #dc3545;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+[contenteditable="true"] {
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+[contenteditable="true"]:hover {
+    background: rgba(255,255,255,0.05);
+}
+
+[contenteditable="true"]:focus {
+    outline: none;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid #d4af37;
+}
+
+@media (max-width: 992px) {
+    .detail-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 2rem;
+    }
+
+    .article-image {
+        height: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .detail-page {
+        padding: 100px 1rem 3rem;
+    }
+
+    .article-title {
+        font-size: 2rem;
+    }
+
+    .article-image {
+        height: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .detail-container {
+        padding: 1.5rem;
+    }
+
+    .article-title {
+        font-size: 1.8rem;
+    }
+
+    .edit-actions {
+        flex-direction: column;
+    }
+} 
