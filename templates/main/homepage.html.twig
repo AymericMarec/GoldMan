@@ -11,7 +11,7 @@
 
     <section class="hero-section">
         <video class="hero-background" autoplay loop muted>
-            <source src="{{ asset('videos/luxury-background.mp4') }}" type="video/mp4">
+            <source src="{{ asset('video/VideoMenu.mp4') }}" type="video/mp4">
         </video>
         <div class="search-container">
             <h1>Découvrez l'Excellence</h1>
@@ -22,27 +22,29 @@
         </div>
     </section>
 
-    <section class="products-section">
-        <div class="section-header">
-            <h2 class="section-title">Dernières Nouveautés</h2>
-            <a href="{{ path('article_view', {'id': 1}) }}" class="view-all">Voir tous les articles</a>
-        </div>
-        <div class="products-grid">
-            {% for article in articles|slice(0, 4) %}
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="{{ asset('images/' ~ article.image) }}" alt="{{ article.name }}">
+    {% if articles is not empty %}
+        <section class="products-section">
+            <div class="section-header">
+                <h2 class="section-title">Dernières Nouveautés</h2>
+                <a href="{{ path('article_view', {'id': 1}) }}" class="view-all">Voir tous les articles</a>
+            </div>
+            <div class="products-grid">
+                {% for article in articles|slice(0, 4) %}
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="{{ asset('images/' ~ article.image) }}" alt="{{ article.name }}">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">{{ article.name }}</h3>
+                            <p class="product-price">{{ article.price }} €</p>
+                            <p class="product-date">{{ article.publicationDate|date('d/m/Y') }}</p>
+                            <a href="{{ path('app_detail', {'uid': article.uid}) }}" class="view-button">Découvrir</a>
+                        </div>
                     </div>
-                    <div class="product-info">
-                        <h3 class="product-name">{{ article.name }}</h3>
-                        <p class="product-price">{{ article.price }} €</p>
-                        <p class="product-date">{{ article.publicationDate|date('d/m/Y') }}</p>
-                        <a href="{{ path('app_detail', {'uid': article.uid}) }}" class="view-button">Découvrir</a>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    </section>
+                {% endfor %}
+            </div>
+        </section>
+    {% endif %}
 
     {% include 'partials/footer.html.twig' %}
 {% endblock %}

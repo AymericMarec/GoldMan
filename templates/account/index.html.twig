@@ -14,11 +14,15 @@
     <main class="account-page">
         <div class="account-container">
             <div class="account-header">
-                <div class="profile-image">
-                    <img src="{{ asset('images/' ~ app.user.profilePicture) }}" alt="Photo de profil">
+                <div class="header-content">
+                    <div class="profile-image">
+                        <img src="{{ asset('images/' ~ app.user.profilePicture) }}" alt="Photo de profil">
+                    </div>
+                    <div class="user-info">
+                        <h1>{{ app.user.username }}</h1>
+                        <p class="balance"><i class="fas fa-wallet"></i> Solde : {{ app.user.balance }}€</p>
+                    </div>
                 </div>
-                <h1>Mon Compte</h1>
-                <p class="balance">Solde : {{ app.user.balance }}€</p>
             </div>
 
             <div class="account-sections">
@@ -134,9 +138,9 @@
                             <div class="no-articles">
                                 <i class="fas fa-box-open"></i>
                                 <p>Vous n'avez pas encore publié d'articles.</p>
-                                <a href="{{ path('app_article_new') }}" class="new-article-button">
+                                {# <a href="{{ path('SellPage') }}" class="new-article-button">
                                     <i class="fas fa-plus"></i> Publier mon premier article
-                                </a>
+                                </a> #}
                             </div>
                         {% endfor %}
                     </div>
