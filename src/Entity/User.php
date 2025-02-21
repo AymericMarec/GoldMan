@@ -48,13 +48,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var Collection<int, Cart>
      */
-    #[ORM\OneToMany(targetEntity: Cart::class, mappedBy: 'UserID')]
+    #[ORM\OneToMany(targetEntity: Cart::class, mappedBy: 'UserID', cascade: ['persist', 'remove'])]
     private Collection $carts;
 
     /**
      * @var Collection<int, Article>
      */
-    #[ORM\OneToMany(targetEntity: Article::class, mappedBy: 'CreatorID')]
+    #[ORM\OneToMany(targetEntity: Article::class, mappedBy: 'CreatorID', cascade: ['persist', 'remove'])]
     private Collection $articles;
 
     #[ORM\Column(length: 255)]
