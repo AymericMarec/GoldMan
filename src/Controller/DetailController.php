@@ -23,12 +23,14 @@ final class DetailController extends AbstractController
         }
         /** @var User $user */
         $user = $this->getUser();
-        if($article->getCreatorID()->getId() == $user->getId() || in_array("ROLE_ADMIN",$user->getRoles())){
+        if(!$user){
+            $editable = false;
+            $favorite = false;
+        }else if($article->getCreatorID()->getId() == $user->getId() || in_array("ROLE_ADMIN",$user->getRoles())){
             $editable = true;
             $favorite = false;
         }else {
             $editable = false;
-            // if($user->getfavorite())
         }
         return $this->render('detail/index.html.twig', [
             'article' => $article,

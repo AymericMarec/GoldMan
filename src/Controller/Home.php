@@ -8,7 +8,6 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\ORM\EntityManagerInterface;
 
-#[Route('{_locale<%app.supported_locales%>}')]
 final class Home extends AbstractController
 {
     #[Route('/', name: 'home')]

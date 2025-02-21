@@ -1,31 +1,39 @@
 <footer class="footer">
     <div class="footer-container">
         <div class="footer-section">
-            <h3>GOLDMAN</h3>
+            <h3>À propos de GOLDMAN</h3>
             <ul class="footer-links">
-                <li><a href="#">L'Excellence du Luxe</a></li>
-                <li><a href="#">Notre Engagement</a></li>
-                <li><a href="#">Service Conciergerie</a></li>
+                <li><a href="https://fr.wikipedia.org/wiki/Jean-Jacques_Goldman">Notre Histoire</a></li>
+                <li><a href="https://fr.wikipedia.org/wiki/Jean-Jacques_Goldman">Nos Engagements</a></li>
+                <li><a href="https://fr.wikipedia.org/wiki/Jean-Jacques_Goldman">Nos partenaires</a></li>
             </ul>
         </div>
+        
         <div class="footer-section">
-            <h3>Services Premium</h3>
+            <h3>Nos Services</h3>
             <ul class="footer-links">
-                <li><a href="#">Service VIP</a></li>
-                <li><a href="#">Livraison Personnalisée</a></li>
-                <li><a href="#">Garantie Excellence</a></li>
+                <li><a href="{{ path('SellPage') }}">Vendre un Article</a></li>
+                <li><a href="{{ path('article_view', {'id': 1}) }}">Tout les articles</a></li>
+                <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Service Après-Vente</a></li>
             </ul>
         </div>
+
         <div class="footer-section">
-            <h3>Contact Privilégié</h3>
+            <h3>Aide & Contact</h3>
             <ul class="footer-links">
-                <li><a href="#">+33 1 XX XX XX XX</a></li>
-                <li><a href="#">contact@goldman-luxury.fr</a></li>
-                <li><a href="#">8 Place Vendôme, Paris</a></li>
+                <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Conditions Générales</a></li>
+                <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Mentions Légales</a></li>
+                <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Contact@goldman.fr</a></li>
             </ul>
         </div>
     </div>
+    
     <div class="footer-bottom">
-        <p>&copy; 2024 GOLDMAN - L'Art du Luxe. Tous droits réservés.</p>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+        <p>&copy; {{ "now"|date("Y") }} GOLDMAN - L'Excellence de la Joaillerie. Tous droits réservés.</p>
     </div>
 </footer> 

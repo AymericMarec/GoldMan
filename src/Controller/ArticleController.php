@@ -15,14 +15,26 @@ final class ArticleController extends AbstractController
     public function show(EntityManagerInterface $entityManager, int $id,Request $request): Response
     {
         $search = $request->query->get('search');
+        $minPrice = $request->request->get('minPrice');
+        $sortOrder = $request->request->get('priceSort');
+
+        $qb = $entityManager->getRepository(Article::class)->createQueryBuilder('article');
         if ($search){
-            $qb = $entityManager->getRepository(Article::class)->createQueryBuilder('article');
             $qb->andWhere('article.name LIKE :query OR article.description LIKE :query')
             ->setParameter('query', '%'.$search.'%');
             $articles = $qb->getQuery()->getResult();
-        }else{
+        }
+        if ($minPrice) {
+            $qb->andWhere('article.price >= :minPrice')
+               ->setParameter('minPrice', $minPrice);
+        }
+        if ($sortOrder) {
+            $qb->orderBy('article.price', $sortOrder);
+        }
+        if(!$search && !$minPrice && !$sortOrder){
             $articles = $entityManager->getRepository(Article::class)->findAll();
         }
+        $articles = $qb->getQuery()->getResult();
         $nbArticlePerPage = 9;
         if(count($articles)>9){
             $articles = array_slice($articles,($id-1)*$nbArticlePerPage,($id-1)*$nbArticlePerPage+$nbArticlePerPage-1);
@@ -37,6 +49,31 @@ final class ArticleController extends AbstractController
             'visible_first' => $visible_first,
             'visible_endless' => $visible_endless,
             'id' => $id
+        ]);
+    }
+
+    #[Route('/article/sort', name: 'article_sort', methods: ['POST'])]
+    public function sortArticles(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $minPrice = $request->request->get('minPrice');
+        $sortOrder = $request->request->get('priceSort');
+        return $this->redirect('http://stackoverflow.com');
+        $qb = $entityManager->getRepository(Article::class)->createQueryBuilder('a');
+        
+        if ($minPrice) {
+            $qb->andWhere('a.price >= :minPrice')
+               ->setParameter('minPrice', $minPrice);
+        }
+        if ($sortOrder) {
+            $qb->orderBy('a.price', $sortOrder);
+        }
+        $articles = $qb->getQuery()->getResult();
+
+        return $this->render('article/index.html.twig', [
+            'articles' => $articles,
+            'id' => 1, // Ajustez selon votre logique de pagination
+            'visible_first' => false,
+            'visible_endless' => false
         ]);
     }
 }
