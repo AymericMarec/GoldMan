@@ -1,10 +1,9 @@
 <div>
 
     {% for article in articles %}
-    <img src= {{ article.image }} width="250" height="200"">
+    <a href="{{ path('app_detail', { 'uid' : article.uid })}}"><img src= {{ article.image }} width="250" height="200""></a>
     {{article.name}}
     {{article.price }} €
-    <a href="{{ path('app_detail', { 'uid' : article.uid })}}"> detail </a>
     {% endfor %}
 
     {%- if visible_first == true -%}
@@ -14,3 +13,6 @@
     <a href="{{ path('article_view', { 'id' : id + 1 })}}"> > </a>
     {% endif %}
 </div>
+<input type="text" id="search" name="search" placeholder="recherche">
+<input type="submit" onclick="Search()">
+<script src="{{ asset('js/search.js') }}"></script>
