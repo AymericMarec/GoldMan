@@ -9,6 +9,8 @@
 .search-section {
     text-align: center;
     margin-bottom: 4rem;
+    max-width: 1200px;
+    margin: 0 auto 4rem;
 }
 
 .search-section h1 {
@@ -25,6 +27,9 @@
     gap: 1rem;
     max-width: 600px;
     margin: 0 auto;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #222;
+    padding-bottom: 2rem;
 }
 
 .search-input {
@@ -174,6 +179,66 @@
     font-size: 1.2rem;
 }
 
+.search-controls {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3rem;
+}
+
+.sort-container {
+    position: relative;
+    min-width: 200px;
+}
+
+.sort-select {
+    width: 100%;
+    padding: 1rem 2rem;
+    appearance: none;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid #333;
+    border-radius: 4px;
+    color: #d4af37;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.sort-select:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #d4af37;
+}
+
+.sort-select:focus {
+    outline: none;
+    border-color: #d4af37;
+    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+}
+
+.select-icon {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #d4af37;
+    pointer-events: none;
+    transition: transform 0.3s ease;
+}
+
+.sort-select:focus + .select-icon {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+/* Styles pour les options du select */
+.sort-select option {
+    background: #111;
+    color: #d4af37;
+    padding: 1rem;
+}
+
+/* Ajustements responsive */
 @media (max-width: 768px) {
     .articles-page {
         padding: 100px 1rem 3rem;
@@ -187,10 +252,33 @@
     .search-container {
         width: 90%;
         max-width: 100%;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1.5rem;
     }
 
     .articles-grid {
         padding: 0;
+    }
+
+    .search-controls {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .sort-container {
+        width: 100%;
+    }
+
+    .filter-controls {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .price-filter {
+        width: 100%;
+        justify-content: center;
     }
 }
 
@@ -209,5 +297,188 @@
 
     .article-image {
         height: 220px;
+    }
+}
+
+.filter-controls {
+    display: grid;
+    grid-template-columns: 2fr 1fr auto;
+    align-items: end;
+    gap: 2rem;
+    margin-top: 3rem;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid #222;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.filter-controls::before {
+    content: 'Filtres';
+    position: absolute;
+    top: -12px;
+    left: 20px;
+    background: #000;
+    padding: 0 1rem;
+    color: #d4af37;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+}
+
+.range-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+    width: 100%;
+}
+
+.price-filter {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    min-width: 400px;
+}
+
+.price-filter label {
+    color: #d4af37;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    text-align: left;
+}
+
+.price-range {
+    -webkit-appearance: none;
+    width: 300px;
+    height: 2px;
+    background: linear-gradient(to right, #d4af37 0%, #333 0%);
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.price-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background: #d4af37;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid #000;
+}
+
+.price-range::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    background: #c4a032;
+}
+
+.price-value {
+    color: #d4af37;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.1rem;
+    min-width: 100px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    border: 1px solid #333;
+}
+
+.info-tooltip {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    margin-left: 1rem;
+}
+
+.info-tooltip i {
+    color: #d4af37;
+    font-size: 1.2rem;
+    cursor: help;
+    transition: all 0.3s ease;
+}
+
+.tooltip-content {
+    visibility: hidden;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    padding: 1rem;
+    background: rgba(17, 17, 17, 0.95);
+    border: 1px solid #d4af37;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 0.9rem;
+    text-align: center;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 100;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.info-tooltip:hover .tooltip-content {
+    visibility: visible;
+    opacity: 1;
+}
+
+.tooltip-content::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #d4af37 transparent transparent transparent;
+}
+
+/* Style du nouveau bouton Appliquer */
+.apply-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    background: #d4af37;
+    border: none;
+    border-radius: 4px;
+    color: #000;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.apply-button:hover {
+    background: #c4a032;
+    transform: translateY(-2px);
+}
+
+.apply-button i {
+    font-size: 0.9rem;
+}
+
+/* Ajuster le layout des filtres */
+.filter-controls {
+    display: grid;
+    grid-template-columns: 2fr 1fr auto;
+    align-items: end;
+    gap: 2rem;
+}
+
+/* Ajuster le responsive */
+@media (max-width: 768px) {
+    .filter-controls {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .apply-button {
+        width: 100%;
+        justify-content: center;
     }
 } 

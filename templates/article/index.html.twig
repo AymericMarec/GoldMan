@@ -20,6 +20,33 @@
                     <i class="fas fa-search"></i>
                 </button>
             </div>
+            
+            <form method="post" class="filter-controls">
+                <div class="price-filter">
+                    <label>Prix minimum</label>
+                    <div class="range-container">
+                        <input type="range" id="minPrice" min="0" max="100000" step="1000" value="0" class="price-range" oninput="this.nextElementSibling.value = this.value + ' €'" name="minPrice">
+                        <output class="price-value">0 €</output>
+                        <div class="info-tooltip">
+                            <i class="fas fa-question-circle"></i>
+                            <div class="tooltip-content">
+                                GOLDMAN est une plateforme de luxe. L'absence d'un filtre de prix maximum est volontaire : si votre budget est limité, nous vous invitons à visiter d'autres boutiques.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sort-container">
+                    <select id="priceSort" name="priceSort" class="sort-select">
+                        <option value="" disabled selected>Trier par prix</option>
+                        <option value="DESC">Prix décroissant</option>
+                        <option value="ASC">Prix croissant</option>
+                    </select>
+                    <i class="fas fa-chevron-down select-icon"></i>
+                </div>
+
+                <input type="submit" class="apply-button" value="Appliquer">
+            </form>
         </div>
 
         <div class="articles-grid">
@@ -60,8 +87,4 @@
     </main>
 
     {% include 'partials/footer.html.twig' %}
-{% endblock %}
-
-{% block javascripts %}
-    <script src="{{ asset('js/search.js') }}"></script>
 {% endblock %}
