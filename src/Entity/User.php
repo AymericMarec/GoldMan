@@ -66,6 +66,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $profilePicture = null;
 
+    /**
+     * @var Collection<int, Favorite>
+     */
+    #[ORM\OneToMany(targetEntity: Favorite::class, mappedBy: 'userUID')]
+    private Collection $favorite;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -76,6 +82,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->invoices = new ArrayCollection();
         $this->carts = new ArrayCollection();
         $this->articles = new ArrayCollection();
+        $this->favorite = new ArrayCollection();
     }
     public function getEmail(): ?string
     {
@@ -288,6 +295,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }else {
             $this->roles = ["ROLE_USER"];
         }
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Favorite>
+     */
+    public function getfavorite(): Collection
+    {
+        return $this->favorite;
+    }
+
+    public function addfavorite(Favorite $favorite): static
+    {
+        if (!$this->favorite->contains($favorite)) {
+            $this->favorite->add($favorite);
+            $favorite->setUserUID($this);
+        }
+
+        return $this;
+    }
+
+    public function removefavorite(Favorite $favorite): static
+    {
+        if ($this->favorite->removeElement($favorite)) {
+            // set the owning side to null (unless already changed)
+            if ($favorite->getUserUID() === $this) {
+                $favorite->setUserUID(null);
+            }
+        }
+
         return $this;
     }
 }
