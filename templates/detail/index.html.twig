@@ -24,7 +24,16 @@
 
                 <div class="article-meta">
                     <p>Publié le {{ article.publicationDate|date('d/m/Y') }}</p>
-                    <p>Par {{ article.CreatorID.email }}</p>
+                    <div class="seller-info">
+                        <div class="seller-image">
+                            {% if article.CreatorID.profilePicture %}
+                                <img src="{{ asset('images/' ~ article.CreatorID.profilePicture) }}" alt="Photo de profil">
+                            {% else %}
+                                <i class="fas fa-user"></i>
+                            {% endif %}
+                        </div>
+                        <p>Par {{ article.CreatorID.username }}</p>
+                    </div>
                 </div>
 
                 <div class="article-description">
