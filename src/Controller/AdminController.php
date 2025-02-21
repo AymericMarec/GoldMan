@@ -21,6 +21,11 @@ final class AdminController extends AbstractController{
             'users' => $users,   
         ]);
     }
+    #[Route('/admin', name: 'adminMenuPage',methods:'GET')]
+    public function ShowMenu(): Response
+    {
+        return $this->render('admin/menu.html.twig');
+    }
     #[Route('/admin/user', name: 'DeleteUser',methods:'DELETE')]
     public function DeleteUser(EntityManagerInterface $em,Request $request)
     {

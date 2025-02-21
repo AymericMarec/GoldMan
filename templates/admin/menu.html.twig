@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}GOLDMAN - Administration{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/header.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+{% endblock %}
+
+{% block body %}
+    {% include 'partials/header.html.twig' %}
+
+    <main class="admin-menu">
+        <div class="menu-container">
+            <div class="menu-header">
+                <h1>Administration GOLDMAN</h1>
+                <p>Gérez les utilisateurs et les articles de votre boutique</p>
+            </div>
+
+            <div class="menu-grid">
+                <a href="/admin/user" class="menu-card">
+                    <div class="menu-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h2 class="menu-title">Gestion des Utilisateurs</h2>
+                    <p class="menu-description">
+                        Gérez les comptes utilisateurs, les droits administrateurs et les suppressions
+                    </p>
+                </a>
+
+                <a href="/admin/article" class="menu-card">
+                    <div class="menu-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h2 class="menu-title">Gestion des Articles</h2>
+                    <p class="menu-description">
+                        Supervisez tous les articles en vente, modérez et supprimez si nécessaire
+                    </p>
+                </a>
+            </div>
+        </div>
+    </main>
+{% endblock %}

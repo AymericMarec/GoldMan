@@ -1,20 +1,54 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AdminController!{% endblock %}
+{% block title %}GOLDMAN - Administration des articles{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/header.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+{% endblock %}
 
 {% block body %}
-<h1>All articles</h1>
-<ul>
-    {% for article in articles %}
-        <div>
-            <li>{{ article.name }}</li>
-            <li>{{ article.description }}</li>
-            <li>{{ article.price }}</li>
-            <div>
-            <button data-uid={{article.uid}} onclick="Delete(this)">Supprimer</button>
+    {% include 'partials/header.html.twig' %}
+
+    <main class="admin-page">
+        <div class="admin-container">
+            <div class="admin-header">
+                <h1>Gestion des Articles</h1>
+            </div>
+
+            <div class="articles-grid">
+                {% for article in articles %}
+                    <div class="article-card">
+                        <div class="article-image">
+                            <img src="{{ asset('images/' ~ article.image) }}" alt="{{ article.name }}">
+                        </div>
+                        <div class="article-info">
+                            <h3 class="article-name">{{ article.name }}</h3>
+                            <p class="article-description">{{ article.description }}</p>
+                            <p class="article-price">{{ article.price }}€</p>
+                            <div class="article-actions">
+                                <a href="{{ path('app_detail', {'uid': article.uid}) }}" class="view-button">
+                                    <i class="fas fa-eye"></i> Voir
+                                </a>
+                                <button class="delete-button" data-uid="{{article.uid}}" onclick="Delete(this)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="empty-message">
+                        <p>Aucun article n'est disponible pour le moment.</p>
+                    </div>
+                {% endfor %}
             </div>
         </div>
-    {% endfor %}
-</ul>
+    </main>
+
+    {% include 'partials/footer.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
 <script src="{{ asset('js/adminGestion.js') }}"></script>
 {% endblock %}

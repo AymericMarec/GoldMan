@@ -1,18 +1,90 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello SellController!{% endblock %}
+{% block title %}GOLDMAN - Vendre un article{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/header.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/account.css') }}">
+{% endblock %}
 
 {% block body %}
+    {% include 'partials/header.html.twig' %}
 
-<div class="example-wrapper">
-    <form method="post" accept-charset="UTF-8">
-        <p>name</p> 
-        <input type="text" name="name">
-        <p>description</p> 
-        <textarea name="description"></textarea>
-        <p>price</p>
-        <input type="number" name="price">
-        <input type="submit" value="submit">
-    </form>
-</div>
+    <main class="account-page">
+        <div class="account-container">
+            <div class="account-header">
+                <h1>Vendre un Article</h1>
+                <p class="subtitle">Publiez votre bijou sur GOLDMAN</p>
+            </div>
+
+            <section class="account-section">
+                <form method="post" enctype="multipart/form-data" class="sell-form">
+                    <div class="form-group">
+                        <label>Photo du produit</label>
+                        <div class="product-image-upload">
+                            <input type="file" name="image" id="productImage" accept="image/*" class="file-input" required>
+                            <label for="productImage" class="product-image-label">
+                                <div class="upload-icon">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                </div>
+                                <div class="upload-text">
+                                    <span class="primary-text">Glissez votre image ici</span>
+                                    <span class="secondary-text">ou cliquez pour sélectionner</span>
+                                </div>
+                            </label>
+                            <div id="imagePreview" class="image-preview"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Nom de l'article</label>
+                        <input type="text" name="name" required placeholder="Ex: Bracelet en or 18 carats">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea name="description" required placeholder="Décrivez votre article en détail (matériaux, dimensions, état, etc.)"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Prix</label>
+                        <div class="price-input">
+                            <input type="number" name="price" required min="0" step="0.01" placeholder="0.00">
+                            <span class="currency">€</span>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="submit-button">
+                            <i class="fas fa-check"></i> Publier l'article
+                        </button>
+                        <a href="/account" class="cancel-button">
+                            <i class="fas fa-times"></i> Annuler
+                        </a>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    {% include 'partials/footer.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+<script>
+document.getElementById('productImage').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    const preview = document.getElementById('imagePreview');
+    
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            preview.style.backgroundImage = `url(${e.target.result})`;
+            preview.style.display = 'block';
+        }
+        reader.readAsDataURL(file);
+    }
+});
+</script>
 {% endblock %}

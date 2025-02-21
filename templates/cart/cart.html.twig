@@ -1,34 +1,92 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mon Panier{% endblock %}
+{% block title %}GOLDMAN - Mon Panier{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/header.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/account.css') }}">
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    {% include 'partials/header.html.twig' %}
 
-<div class="example-wrapper">
-    <h1>Votre Panier</h1>
+    <main class="account-page">
+        <div class="account-container">
+            <div class="account-header">
+                <h1>Mon Panier</h1>
+                {% if carts is not empty %}
+                    <p class="subtitle">{{ carts|length }} article{% if carts|length > 1 %}s{% endif %} dans votre panier</p>
+                {% endif %}
+            </div>
 
-    {% if app.user %}
-        {% if carts is not empty %}
-            <h2>Articles dans votre panier :</h2>
-            <ul>
-                {% for cart in carts %}
-                    <li>
-                        <strong>{{ cart.articleID.name }}</strong><br>
-                        Description : {{ cart.articleID.description }}<br>
-                        Prix : €{{ cart.articleID.price }}<br>
-                    </li>
-                {% endfor %}
-            </ul>
-            <a href="/cart/validate"><button>Valider Panier</button></a>
-        {% else %}
-            <p>Votre panier est vide.</p>
-        {% endif %}
-    {% else %}
-        <p>Vous devez être connecté pour voir votre panier.</p>
-    {% endif %}
-</div>
+            {% if app.user %}
+                {% if carts is not empty %}
+                    <section class="account-section">
+                        <div class="cart-items">
+                            {% for cart in carts %}
+                                <div class="cart-item">
+                                    <div class="cart-item-image">
+                                        <img src="{{ asset('images/' ~ cart.articleID.image) }}" alt="{{ cart.articleID.name }}">
+                                    </div>
+                                    <div class="cart-item-info">
+                                        <h3>{{ cart.articleID.name }}</h3>
+                                        <p class="cart-item-description">{{ cart.articleID.description }}</p>
+                                        <div class="cart-item-price">
+                                            <span class="price">{{ cart.articleID.price }}€</span>
+                                        </div>
+                                    </div>
+                                    <div class="cart-item-actions">
+                                        <a href="/cart/remove/{{ cart.articleID.uid }}" class="remove-button">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="cart-summary">
+                            <div class="summary-details">
+                                <div class="summary-row">
+                                    <span>Sous-total</span>
+                                    <span>{{ total }}€</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Frais de livraison</span>
+                                    <span>Gratuit</span>
+                                </div>
+                                <div class="summary-total">
+                                    <span>Total</span>
+                                    <span>{{ total }}€</span>
+                                </div>
+                            </div>
+                            <a href="/cart/validate" class="checkout-button">
+                                <i class="fas fa-lock"></i> Procéder au paiement
+                            </a>
+                        </div>
+                    </section>
+                {% else %}
+                    <div class="empty-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <h2>Votre panier est vide</h2>
+                        <p>Découvrez nos magnifiques bijoux et commencez votre collection</p>
+                        <a href="/" class="browse-button">
+                            <i class="fas fa-gem"></i> Voir nos articles
+                        </a>
+                    </div>
+                {% endif %}
+            {% else %}
+                <div class="empty-cart">
+                    <i class="fas fa-user-lock"></i>
+                    <h2>Connectez-vous pour accéder à votre panier</h2>
+                    <p>Vous devez être connecté pour voir et gérer votre panier</p>
+                    <a href="/login" class="browse-button">
+                        <i class="fas fa-sign-in-alt"></i> Se connecter
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </main>
+
+    {% include 'partials/footer.html.twig' %}
 {% endblock %}

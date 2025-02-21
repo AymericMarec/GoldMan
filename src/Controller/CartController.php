@@ -23,8 +23,14 @@ final class CartController extends AbstractController
             return $this->redirectToRoute('login');
         }
         $carts = $user->getCarts();
+        $totalSold = 0;
+        foreach($carts as $id => $cart) {
+            $article = $cart->getArticleID();
+            $totalSold += $article->getPrice();
+        }
         return $this->render('cart/cart.html.twig', [
             'carts' => $carts,
+            'total' => $totalSold
         ]);
     }
     #[Route('/cart/validate', name: 'validate',methods:'GET')]
@@ -47,7 +53,8 @@ final class CartController extends AbstractController
         }
         return $this->render('cart/validate.html.twig', [
             'carts' => $carts,
-            'canBuy'=> $CanBuy
+            'canBuy'=> $CanBuy,
+            'total' => $totalSold
         ]);
     }
     #[Route('/cart/validate', name: 'CreateInvoice',methods:'POST')]

@@ -1,24 +1,90 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mon Panier{% endblock %}
+{% block title %}GOLDMAN - Validation de commande{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/header.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/account.css') }}">
+{% endblock %}
 
 {% block body %}
-{% if canBuy %}
-<div>
-    <form method="post" accept-charset="UTF-8">
-        <p>Ville</p>
-        <input type="text" name="city">
-        <p>Adresse</p>
-        <input type="text" name="adress">
-        <p>Code Postal</p>
-        <input type="number" name="postalCode">
-        <input type="submit">
-    </form>
-</div>
-{% else %}
-<div>
-    <h1>Solde insuffisant</h1>
-</div>
-{% endif %}
+    {% include 'partials/header.html.twig' %}
 
+    <main class="account-page">
+        <div class="account-container">
+            {% if canBuy %}
+                <div class="account-header">
+                    <h1>Finalisation de la commande</h1>
+                    <p class="subtitle">Renseignez vos informations de livraison</p>
+                </div>
+
+                <section class="account-section">
+                    <form method="post" class="checkout-form">
+                        <div class="form-group">
+                            <label>Adresse de livraison</label>
+                            <input type="text" name="adress" required placeholder="123 rue de la Paix">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Ville</label>
+                                <input type="text" name="city" required placeholder="Paris">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Code Postal</label>
+                                <input type="number" name="postalCode" required placeholder="75000">
+                            </div>
+                        </div>
+
+                        <div class="order-summary">
+                            <h3>Récapitulatif de la commande</h3>
+                            <div class="summary-details">
+                                <div class="summary-row">
+                                    <span>Total des articles</span>
+                                    <span>{{ total }}€</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Frais de livraison</span>
+                                    <span>Gratuit</span>
+                                </div>
+                                <div class="summary-total">
+                                    <span>Total à payer</span>
+                                    <span>{{ total }}€</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="submit-button">
+                                <i class="fas fa-check"></i> Confirmer la commande
+                            </button>
+                            <a href="/cart" class="cancel-button">
+                                <i class="fas fa-arrow-left"></i> Retour au panier
+                            </a>
+                        </div>
+                    </form>
+                </section>
+            {% else %}
+                <div class="error-container">
+                    <div class="error-icon">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+                    <h2>Solde insuffisant</h2>
+                    <p>Votre solde actuel ne permet pas de finaliser cet achat.</p>
+                    <div class="error-actions">
+                        <a href="/account" class="primary-button">
+                            <i class="fas fa-wallet"></i> Ajouter des fonds
+                        </a>
+                        <a href="/cart" class="secondary-button">
+                            <i class="fas fa-arrow-left"></i> Retour au panier
+                        </a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </main>
+
+    {% include 'partials/footer.html.twig' %}
 {% endblock %}
