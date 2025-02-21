@@ -28,19 +28,10 @@ class ArticleFormType extends AbstractType
                 'constraints' => [
                     new File(
                         maxSize: '1024k',
-                        mimeTypes: [
-                            'application/jpg',
-                            'application/png',
-                        ],
                         mimeTypesMessage: 'Please upload a valid Image.',
                     )],])
-                    ->add('uid')
                     ->add('stock', EntityType::class, [
                         'class' => Stock::class,
-                        'choice_label' => 'id',
-                    ])
-                    ->add('CreatorID', EntityType::class, [
-                        'class' => User::class,
                         'choice_label' => 'id',
                     ])
             ->add('save' , SubmitType::class, [
