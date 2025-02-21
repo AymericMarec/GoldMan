@@ -1,0 +1,123 @@
+.header {
+    background: rgba(0,0,0,0.95);
+    padding: 1.5rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.nav-container {
+    width: 95%;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    color: #d4af37;
+    text-decoration: none;
+    letter-spacing: 2px;
+}
+
+.nav-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6rem;
+}
+
+.nav-right {
+    margin-left: auto;
+}
+
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    letter-spacing: 1.5px;
+    transition: color 0.3s ease;
+    text-transform: uppercase;
+}
+
+.nav-link:hover {
+    color: #d4af37;
+}
+
+.user-menu {
+    position: relative;
+}
+
+.user-icon {
+    color: #d4af37;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.user-dropdown {
+    position: absolute;
+    top: calc(100% + 1rem);
+    right: 0;
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 3px;
+    padding: 1rem;
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.user-menu:hover .user-dropdown {
+    opacity: 1;
+    visibility: visible;
+}
+
+.dropdown-link {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding: 0.8rem 1rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+/* Ajout d'un petit délai pour éviter la disparition immédiate */
+.user-dropdown:hover {
+    opacity: 1;
+    visibility: visible;
+}
+
+.separator {
+    border-top: 1px solid #222;
+    margin: 0.5rem 0;
+}
+
+@media (max-width: 768px) {
+    .nav-center {
+        display: none;
+    }
+
+    .nav-center.active {
+        display: flex;
+        position: absolute;
+        flex-direction: column;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #111;
+        padding: 1rem 0;
+        transform: translateX(0);
+    }
+} 

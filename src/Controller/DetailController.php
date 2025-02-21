@@ -10,8 +10,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\SecurityBundle\Security;
-
 
 final class DetailController extends AbstractController
 {
@@ -27,8 +25,10 @@ final class DetailController extends AbstractController
         $user = $this->getUser();
         if($article->getCreatorID()->getId() == $user->getId() || in_array("ROLE_ADMIN",$user->getRoles())){
             $editable = true;
+            $favorite = false;
         }else {
             $editable = false;
+            // if($user->getfavorite())
         }
         return $this->render('detail/index.html.twig', [
             'article' => $article,

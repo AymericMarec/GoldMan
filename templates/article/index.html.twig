@@ -1,18 +1,67 @@
-<div>
+{% extends 'base.html.twig' %}
 
-    {% for article in articles %}
-    <a href="{{ path('app_detail', { 'uid' : article.uid })}}"><img src= {{ article.image }} width="250" height="200""></a>
-    {{article.name}}
-    {{article.price }} €
-    {% endfor %}
+{% block title %}GOLDMAN - Tous les Articles{% endblock %}
 
-    {%- if visible_first == true -%}
-    <a href="{{ path('article_view', { 'id' : id - 1 })}}"> < </a>
-    {% endif %}
-    {%- if visible_endless == true -%}
-    <a href="{{ path('article_view', { 'id' : id + 1 })}}"> > </a>
-    {% endif %}
-</div>
-<input type="text" id="search" name="search" placeholder="recherche">
-<input type="submit" onclick="Search()">
-<script src="{{ asset('js/search.js') }}"></script>
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/header.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/articles.css') }}">
+{% endblock %}
+
+{% block body %}
+    {% include 'partials/header.html.twig' %}
+
+    <main class="articles-page">
+        <div class="search-section">
+            <h1>Tous les Articles</h1>
+            <div class="search-container">
+                <input type="text" id="search" name="search" placeholder="Rechercher un article..." class="search-input">
+                <button onclick="Search()" class="search-button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="articles-grid">
+            {% for article in articles %}
+                <div class="article-card">
+                    <div class="article-image">
+                        <a href="{{ path('app_detail', { 'uid' : article.uid })}}">
+                            <img src="{{ asset('images/' ~ article.image) }}" alt="{{ article.name }}">
+                        </a>
+                    </div>
+                    <div class="article-info">
+                        <h3>{{ article.name }}</h3>
+                        <p class="article-price">{{ article.price }} €</p>
+                        <p class="article-date">{{ article.publicationDate|date('d/m/Y') }}</p>
+                        <a href="{{ path('app_detail', {'uid': article.uid}) }}" class="view-button">Découvrir</a>
+                    </div>
+                </div>
+            {% else %}
+                <div class="no-results">
+                    <p>Aucun article trouvé</p>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="pagination">
+            {% if visible_first %}
+                <a href="{{ path('article_view', { 'id' : id - 1 })}}" class="page-link">
+                    <i class="fas fa-chevron-left"></i> Précédent
+                </a>
+            {% endif %}
+            
+            {% if visible_endless %}
+                <a href="{{ path('article_view', { 'id' : id + 1 })}}" class="page-link">
+                    Suivant <i class="fas fa-chevron-right"></i>
+                </a>
+            {% endif %}
+        </div>
+    </main>
+
+    {% include 'partials/footer.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/search.js') }}"></script>
+{% endblock %}

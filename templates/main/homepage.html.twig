@@ -1,13 +1,53 @@
-<div>
+{% extends 'base.html.twig' %}
 
-    {% for article in articles %}
-    <img src= {{ article.image }} width="250" height="200">
-    {{article.name}}
-    {{article.price }} €
-    {% endfor %}
-    <a href="{{ path('app_register')}}"> register </a>
-    <a href="{{ path('login')}}"> login </a>
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/header.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+{% endblock %}
 
-        
-    <publicationDate>
-</div>
+{% block body %}
+    {% include 'partials/header.html.twig' %}
+
+    <section class="hero-section">
+        <video class="hero-background" autoplay loop muted>
+            <source src="{{ asset('videos/luxury-background.mp4') }}" type="video/mp4">
+        </video>
+        <div class="search-container">
+            <h1>Découvrez l'Excellence</h1>
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Rechercher un article...">
+                <button class="search-button">Rechercher</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="products-section">
+        <div class="section-header">
+            <h2 class="section-title">Dernières Nouveautés</h2>
+            <a href="{{ path('article_view', {'id': 1}) }}" class="view-all">Voir tous les articles</a>
+        </div>
+        <div class="products-grid">
+            {% for article in articles|slice(0, 4) %}
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="{{ asset('images/' ~ article.image) }}" alt="{{ article.name }}">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">{{ article.name }}</h3>
+                        <p class="product-price">{{ article.price }} €</p>
+                        <p class="product-date">{{ article.publicationDate|date('d/m/Y') }}</p>
+                        <a href="{{ path('app_detail', {'uid': article.uid}) }}" class="view-button">Découvrir</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    {% include 'partials/footer.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/header.js') }}"></script>
+    <script src="{{ asset('js/home.js') }}"></script>
+{% endblock %}
