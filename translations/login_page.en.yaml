@@ -1,0 +1,16 @@
+connection_goldman:
+  "GOLDMAN - Connection"
+connection:
+  "Connection"
+access:
+  "Access your personal space"
+password:
+  "Password"
+remember:
+  "Remember me"
+login:
+  "Log in"
+nothing:
+  "No account yet ?"
+account:
+  "Create an account"

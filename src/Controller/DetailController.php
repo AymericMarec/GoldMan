@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route('{_locale<%app.supported_locales%>}')]
 final class DetailController extends AbstractController
 {
     #[Route('/detail/{uid}', name: 'app_detail')]

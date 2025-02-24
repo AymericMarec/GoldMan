@@ -1,7 +1,3 @@
-login:
-  "login"
-register:
-  "register"
 main:
   "<h1>Discover Excellence</h1>"
 discover:
@@ -14,21 +10,3 @@ search:
   "Search"
 view:
   "See all articles"
-luxe:
-  "Luxury Excellence"
-commitment:
-  "Our commitment"
-concierge:
-  "Concierge Service"
-delivery:
-  "Personalized Delivery"
-excellence:
-  "Guarantee of Excellence"
-all rights reserved:
-  "© 2024 GOLDMAN - The Art of Luxury. All rights reserved."
-account:
-  "My Account"
-cart:
-  "my cart"
-disconnect:
-  "disconnect"

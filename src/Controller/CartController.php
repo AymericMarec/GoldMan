@@ -12,6 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 
+#[Route('{_locale<%app.supported_locales%>}')]
 final class CartController extends AbstractController
 {
     #[Route('/cart', name: 'cart')]

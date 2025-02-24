@@ -16,6 +16,7 @@ use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
+#[Route('{_locale<%app.supported_locales%>}')]
 final class SellController extends AbstractController{
 //     #[Route('/sell', name: 'SellPage',methods: 'GET')]
 //     public function index(): Response

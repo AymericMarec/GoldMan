@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Request;
 
+#[Route('{_locale<%app.supported_locales%>}')]
 final class ArticleController extends AbstractController
 {
     #[Route('/article/{id}', name: 'article_view', requirements: ['id' => '\d+'])]

@@ -12,6 +12,7 @@ use App\Repository\UserRepository;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
+#[Route('{_locale<%app.supported_locales%>}')]
 final class AdminController extends AbstractController{
     #[Route('/admin/user', name: 'adminUserPage',methods:'GET')]
     public function ShowUser(UserRepository $userRepository): Response

@@ -10,6 +10,7 @@ use App\Entity\Article;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
+#[Route('{_locale<%app.supported_locales%>}')]
 final class EditController extends AbstractController{
     #[Route('/edit/{uid}', name: 'editArticle',methods:'PUT')]
     public function SaveChanges(string $uid,ArticleRepository $articleRepository,Request $request,EntityManagerInterface $em): Response

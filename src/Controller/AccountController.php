@@ -12,6 +12,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Exception;
 use App\Repository\UserRepository;
 
+#[Route('{_locale<%app.supported_locales%>}')]
 final class AccountController extends AbstractController{
     #[Route('/account', name: 'AccountPage',methods:'GET')]
     public function index(Request $request,UserRepository $userRepository): Response
