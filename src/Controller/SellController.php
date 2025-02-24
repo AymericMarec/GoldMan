@@ -48,7 +48,7 @@ final class SellController extends AbstractController{
 //     }
 // }
 
-#[Route('/sell', name: 'CreateArticle')]
+#[Route('/sell', name: 'SellPage')]
 public function CreateArticle(
     Request $request,
     EntityManagerInterface $entityManager,
