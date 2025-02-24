@@ -76,6 +76,8 @@ public function CreateArticle(
         $article->setUid(Uuid::v4()->toRfc4122());
         $entityManager->persist($article);
         $entityManager->flush();
+
+        return $this->redirectToRoute('AccountPage');
     }
 
     return $this->render('sell/index.html test.twig', [

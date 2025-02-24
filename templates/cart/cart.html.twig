@@ -27,7 +27,7 @@
                             {% for cart in carts %}
                                 <div class="cart-item">
                                     <div class="cart-item-image">
-                                        <img src="{{ asset('images/' ~ cart.articleID.image) }}" alt="{{ cart.articleID.name }}">
+                                        <img src="{{ asset('uploads/images/articles/' ~ cart.articleID.image) }}" alt="{{ cart.articleID.name }}">
                                     </div>
                                     <div class="cart-item-info">
                                         <h3>{{ cart.articleID.name }}</h3>
