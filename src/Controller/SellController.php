@@ -45,7 +45,7 @@ final class SellController extends AbstractController{
 //         return $this->render('sell/index.html.twig', [
 //             'controller_name' => 'SellController',
 //         ]);
-//     }m
+//     }
 // }
 
 #[Route('/sell', name: 'SellPage')]
