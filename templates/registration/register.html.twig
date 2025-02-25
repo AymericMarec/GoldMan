@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}GOLDMAN - Inscription{% endblock %}
+{% block title %}{{ 'connection_goldman'|trans({}, 'login_page')|raw }}{% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/auth.css') }}">
@@ -14,8 +14,8 @@
     
     <div class="auth-container">
         <div class="auth-header">
-            <h1 class="auth-title">Inscription</h1>
-            <p class="auth-subtitle">Rejoignez l'excellence</p>
+            <h1 class="auth-title">{{ 'registration'|trans({}, 'login_page')|raw }}</h1>
+            <p class="auth-subtitle">{{ 'join'|trans({}, 'login_page')|raw }}</p>
         </div>
 
         {{ form_errors(registrationForm) }}
@@ -41,10 +41,10 @@
                 {{ form_label(registrationForm.agreeTerms, 'J\'accepte les conditions d\'utilisation', {'label_attr': {'class': 'form-check-label'}}) }}
             </div>
 
-            <button type="submit" class="auth-button">Créer mon compte</button>
+            <button type="submit" class="auth-button">{{ 'create'|trans({}, 'login_page')|raw }}</button>
 
             <div class="auth-links">
-                <p>Déjà inscrit ? <a href="{{ path('login') }}">Se connecter</a></p>
+                <p>{{ 'registered'|trans({}, 'login_page')|raw }}<a href="{{ path('login') }}">{{ 'login'|trans({}, 'login_page')|raw }}</a></p>
             </div>
         {{ form_end(registrationForm) }}
     </div>
