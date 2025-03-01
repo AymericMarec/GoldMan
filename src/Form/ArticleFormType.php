@@ -3,15 +3,13 @@
 namespace App\Form;
 
 use App\Entity\Article;
-use App\Entity\Stock;
-use App\Entity\User;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class ArticleFormType extends AbstractType
 {
@@ -37,16 +35,19 @@ class ArticleFormType extends AbstractType
                         ],
                         mimeTypesMessage: 'Please upload a valid Image.',
                     )],])
-                    ->add('stock', EntityType::class, [
-                        'class' => Stock::class,
-                        'choice_label' => 'id',
-                    ])
+            ->add('stock', IntegerType::class, [
+                'label' => 'Quantité en stock',
+                'mapped' => false,
+                'attr' => [
+                    'min' => 0,
+                    'placeholder' => 'Ex: 1'
+                ]
+            ])
             ->add('save' , SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-success'
                 ]
             ]);
-            
     }
 
     public function configureOptions(OptionsResolver $resolver): void

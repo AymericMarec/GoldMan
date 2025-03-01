@@ -13,7 +13,7 @@ class Stock
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\OneToOne(inversedBy: 'stock', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'stock')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Article $articleID = null;
 

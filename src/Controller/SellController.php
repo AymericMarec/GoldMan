@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use App\Entity\Stock;
 
 #[Route('{_locale<%app.supported_locales%>}')]
 final class SellController extends AbstractController{
@@ -62,7 +63,7 @@ public function CreateArticle(
     $form->handleRequest($request);
     if ($form->isSubmitted() && $form->isValid()) {
         /** @var UploadedFile $imageFile */
-        $imageFile = $form->get('image')->getData();    
+        $imageFile = $form->get('image')->getData();
         if ($imageFile) {
             $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
             $safeFilename = $slugger->slug($originalFilename);
@@ -75,14 +76,20 @@ public function CreateArticle(
         $article->setCreatorID($this->getUser());
         $article->setPublicationDate(new \DateTime());
         $article->setUid(Uuid::v4()->toRfc4122());
+
+        $stock = new Stock();
+        $stock->setArticleID($article);
+        $stock->setNbStock($form->get('stock')->getData());
+
         $entityManager->persist($article);
+        $entityManager->persist($stock);
         $entityManager->flush();
 
         return $this->redirectToRoute('AccountPage');
     }
 
-    return $this->render('sell/index.html test.twig', [
+    return $this->render('sell/index.html.twig', [
         'article_form' => $form->createView()
     ]);
-    }
+}
 }

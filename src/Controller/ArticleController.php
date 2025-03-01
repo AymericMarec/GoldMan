@@ -58,7 +58,6 @@ final class ArticleController extends AbstractController
     {
         $minPrice = $request->request->get('minPrice');
         $sortOrder = $request->request->get('priceSort');
-        return $this->redirect('http://stackoverflow.com');
         $qb = $entityManager->getRepository(Article::class)->createQueryBuilder('a');
         
         if ($minPrice) {
