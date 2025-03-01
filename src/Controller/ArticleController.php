@@ -52,28 +52,4 @@ final class ArticleController extends AbstractController
             'id' => $id
         ]);
     }
-
-    #[Route('/article/sort', name: 'article_sort', methods: ['POST'])]
-    public function sortArticles(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $minPrice = $request->request->get('minPrice');
-        $sortOrder = $request->request->get('priceSort');
-        $qb = $entityManager->getRepository(Article::class)->createQueryBuilder('a');
-        
-        if ($minPrice) {
-            $qb->andWhere('a.price >= :minPrice')
-               ->setParameter('minPrice', $minPrice);
-        }
-        if ($sortOrder) {
-            $qb->orderBy('a.price', $sortOrder);
-        }
-        $articles = $qb->getQuery()->getResult();
-
-        return $this->render('article/index.html.twig', [
-            'articles' => $articles,
-            'id' => 1, // Ajustez selon votre logique de pagination
-            'visible_first' => false,
-            'visible_endless' => false
-        ]);
-    }
 }

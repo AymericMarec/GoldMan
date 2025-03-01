@@ -16,8 +16,8 @@
         <div class="search-container">
             {{ 'main'|trans({}, 'home_page')|raw }}
             <div class="search-bar">
-                <input type="text" class="search-input" placeholder={{ 'bar'|trans({}, 'home_page')|raw }}>
-                <button class="search-button">{{ 'search'|trans({}, 'home_page')|raw }}</button>
+                <input type="text" class="search-input" id="search"placeholder={{ 'bar'|trans({}, 'home_page')|raw }}>
+                <button class="search-button" onclick="Search(this)">{{ 'search'|trans({}, 'home_page')|raw }}</button>
             </div>
         </div>
     </section>
@@ -52,4 +52,6 @@
 {% block javascripts %}
     <script src="{{ asset('js/header.js') }}"></script>
     <script src="{{ asset('js/home.js') }}"></script>
+    <script src="{{ asset('js/search.js') }}"></script>
+
 {% endblock %}

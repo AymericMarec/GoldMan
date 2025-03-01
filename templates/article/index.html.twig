@@ -16,7 +16,7 @@
             <h1>Tous les Articles</h1>
             <div class="search-container">
                 <input type="text" id="search" name="search" placeholder="Rechercher un article..." class="search-input">
-                <button onclick="Search()" class="search-button">
+                <button onclick="Search(this)" class="search-button">
                     <i class="fas fa-search"></i>
                 </button>
             </div>
@@ -87,4 +87,10 @@
     </main>
 
     {% include 'partials/footer.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+
+<script src="{{ asset('js/search.js') }}"></script>
+
 {% endblock %}
