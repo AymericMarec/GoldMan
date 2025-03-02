@@ -1,29 +1,29 @@
 <footer class="footer">
     <div class="footer-container">
         <div class="footer-section">
-            <h3>À propos de GOLDMAN</h3>
+            <h3>{{ 'about'|trans({}, 'footer_page')|raw }}</h3>
             <ul class="footer-links">
-                <li><a href="https://fr.wikipedia.org/wiki/Jean-Jacques_Goldman">Notre Histoire</a></li>
-                <li><a href="https://fr.wikipedia.org/wiki/Jean-Jacques_Goldman">Nos Engagements</a></li>
-                <li><a href="https://fr.wikipedia.org/wiki/Jean-Jacques_Goldman">Nos partenaires</a></li>
+                <li><a href="https://fr.wikipedia.org/wiki/Jean-Jacques_Goldman">{{ 'history'|trans({}, 'footer_page')|raw }}</a></li>
+                <li><a href="https://fr.wikipedia.org/wiki/Jean-Jacques_Goldman">{{ 'engagement'|trans({}, 'footer_page')|raw }}</a></li>
+                <li><a href="https://fr.wikipedia.org/wiki/Jean-Jacques_Goldman">{{ 'partenaire'|trans({}, 'footer_page')|raw }}</a></li>
             </ul>
         </div>
         
         <div class="footer-section">
-            <h3>Nos Services</h3>
+            <h3>{{ 'service'|trans({}, 'footer_page')|raw }}</h3>
             <ul class="footer-links">
-                <li><a href="{{ path('SellPage') }}">Vendre un Article</a></li>
-                <li><a href="{{ path('article_view', {'id': 1}) }}">Tout les articles</a></li>
-                <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Service Après-Vente</a></li>
+                <li><a href="{{ path('SellPage') }}">{{ 'sell'|trans({}, 'footer_page')|raw }}</a></li>
+                <li><a href="{{ path('article_view', {'id': 1}) }}">{{ 'article'|trans({}, 'footer_page')|raw }}</a></li>
+                <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">{{ 'services'|trans({}, 'footer_page')|raw }}</a></li>
             </ul>
         </div>
 
         <div class="footer-section">
-            <h3>Aide & Contact</h3>
+            <h3>{{ 'help'|trans({}, 'footer_page')|raw }}</h3>
             <ul class="footer-links">
-                <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Conditions Générales</a></li>
-                <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Mentions Légales</a></li>
-                <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Contact@goldman.fr</a></li>
+                <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">{{ 'conditions'|trans({}, 'footer_page')|raw }}</a></li>
+                <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">{{ 'notices'|trans({}, 'footer_page')|raw }}</a></li>
+                <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">{{ 'email'|trans({}, 'footer_page')|raw }}</a></li>
             </ul>
         </div>
     </div>
@@ -34,6 +34,6 @@
             <a href="#"><i class="fab fa-facebook"></i></a>
             <a href="#"><i class="fab fa-twitter"></i></a>
         </div>
-        <p>&copy; {{ "now"|date("Y") }} GOLDMAN - L'Excellence de la Joaillerie. Tous droits réservés.</p>
+        <p>&copy; {{ "now"|date("Y") }} {{ 'goldman'|trans({}, 'footer_page')|raw }}</p>
     </div>
 </footer> 

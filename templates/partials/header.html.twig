@@ -4,7 +4,7 @@
         
         <div class="nav-center">
             <a href="{{ path('home') }}" class="nav-link">Accueil</a>
-            <a href="{{ path('article_view', {'id': 1}) }}" class="nav-link">Tous les Articles</a>
+            <a href="{{ path('article_view', {'id': 1}) }}" class="nav-link">{{ 'article'|trans({}, 'header_page')|raw }}</a>
         </div>
 
         <div class="nav-right">
@@ -12,14 +12,14 @@
                 <div class="user-menu">
                     <i class="fas fa-user user-icon"></i>
                     <div class="user-dropdown">
-                        <a href="{{ path('AccountPage') }}" class="dropdown-link">Mon Compte</a>
-                        <a href="{{ path('cart') }}" class="dropdown-link">Mon Panier</a>
+                        <a href="{{ path('AccountPage') }}" class="dropdown-link">{{ 'account'|trans({}, 'header_page')|raw }}</a>
+                        <a href="{{ path('cart') }}" class="dropdown-link">{{ 'cart'|trans({}, 'header_page')|raw }}</a>
                         <div class="separator"></div>
-                        <a href="{{ path('logout') }}" class="dropdown-link">Déconnexion</a>
+                        <a href="{{ path('logout') }}" class="dropdown-link">{{ 'disconnect'|trans({}, 'header_page')|raw }}</a>
                     </div>
                 </div>
             {% else %}
-                <a href="{{ path('login') }}" class="nav-link">Se Connecter</a>
+                <a href="{{ path('login') }}" class="nav-link">{{ 'log'|trans({}, 'header_page')|raw }}</a>
             {% endif %}
         </div>
     </div>

@@ -1,0 +1,122 @@
+article_goldman:
+  "GOLDMAN - All Articles"
+all:
+  "<h1>All Articles</h1>"
+search:
+  "Search for an item..."
+minimum:
+  "<label>Minimum price</label>"
+poor_filter:
+  "GOLDMAN is a luxury platform. The absence of a maximum price filter is voluntary: if your budget is limited, we invite you to visit other stores."
+sort:
+  "Sort by price"
+descending:
+  "Descending price"
+increasing:
+  "Increasing price"
+apply:
+  "Apply"
+discover:
+  "Discover"
+not_results:
+  "<p>No items found</p>"
+previous:
+  "Previous"
+next:
+  "Next"
+published:
+  "Published on "
+picture:
+  "Profile picture"
+by:
+  "By "
+available:
+  "Quantity available : "
+not_available:
+  "Stock not available."
+add_cart:
+  "Add to cart"
+warning:
+  "You cannot add your own item to the cart."
+save:
+  "Save"
+delete:
+  "Delete"
+account_goldman:
+  "GOLDMAN - My Account"
+pay:
+  "Pay : "
+personal:
+  "<h2>Personal Information</h2>"
+password:
+  "<label>Password</label>"
+new_password:
+  "New Password"
+user_name:
+  "<label>Username</label>"
+picture_user:
+  "<label>Profile picture</label>"
+choice_picture:
+  "Choose an image"
+add_funds:
+  "<h2>Add Funds</h2>"
+add_detail:
+  "<label>Amount to add</label>"
+amount:
+  "Amount"
+add:
+  "Add"
+published_article:
+  "<h2>My Published Articles</h2>"
+new_article:
+  "New Article"
+see:
+  "See"
+for_sale:
+  "For sale"
+text_exception:
+  "<p>You haven't published any articles yet.</p>"
+publish:
+  "Publish my first article"
+Invoices:
+  "<h2>My Bills</h2>"
+address:
+  "<label>Address</label>"
+name_address:
+  "<p>123 rue of the peace</p>"
+city:
+  "<label>City</label>"
+name_city:
+  "<p>New York</p>"
+postal:
+  "<label>Zip Code</label>"
+download:
+  "Download"
+sell_goldman:
+  "GOLDMAN - Sell an item"
+sell:
+  "<h1>Sell an Item</h1>"
+text1:
+  "Publish your jewelry on GOLDMAN"
+picture_article:
+  "Product picture"
+text2:
+  "Drag your image here"
+text3:
+  "or click to select"
+name:
+  "Item name"
+ex_name:
+  "Ex: 18-karat gold bracelet"
+description:
+  "Description"
+ex_desc:
+  "Describe your item in detail (materials, dimensions, condition, etc.)"
+price:
+  "Price"
+quantity:
+  "Quantity in stock"
+unit:
+  "unit(s)"
+publish_article:
+  "Publish article"

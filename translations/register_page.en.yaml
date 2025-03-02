@@ -1,5 +1,5 @@
-connection_goldman:
-  "GOLDMAN - Inscription"
+registration_goldman:
+  "GOLDMAN - Registration"
 registration:
   "Registration"
 join:
@@ -12,3 +12,7 @@ login:
   "Log in"
 registered:
   "Already registered ? "
+username:
+  "User name"
+agree:
+  "I accept the terms of use"

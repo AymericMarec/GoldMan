@@ -1,0 +1,28 @@
+cart_goldman:
+  "GOLDMAN - Mon Panier"
+my_cart:
+  "<h1>Mon Panier</h1>"
+cart:
+  " dans votre panier"
+subtotal:
+  "<span>Sous-total</span>"
+delivery_costs:
+  "<span>Frais de livraison</span>"
+free:
+  "<span>Gratuit</span>"
+total:
+  "<span>Total</span>"
+payment:
+  "Procéder au paiement"
+empty_cart:
+  "<h2>Votre panier est vide</h2>"
+discover:
+  "<p>Découvrez nos magnifiques bijoux et commencez votre collection</p>"
+see:
+  "Voir nos articles"
+log1:
+  "<h2>Connectez-vous pour accéder à votre panier</h2>"
+log2:
+  "<p>Vous devez être connecté pour voir et gérer votre panier</p>"
+log_in:
+  "Se connecter"

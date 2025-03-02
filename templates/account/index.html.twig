@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}GOLDMAN - Mon Compte{% endblock %}
+{% block title %}{{ 'account_goldman'|trans({}, 'index_page')|raw }}{% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/header.css') }}">
@@ -16,11 +16,11 @@
             <div class="account-header">
                 <div class="header-content">
                     <div class="profile-image">
-                        <img src="{{ asset('images/' ~ app.user.profilePicture) }}" alt="Photo de profil">
+                        <img src="{{ asset('images/' ~ app.user.profilePicture) }}" alt={{ 'picture'|trans({}, 'index_page')|raw }}>
                     </div>
                     <div class="user-info">
                         <h1>{{ app.user.username }}</h1>
-                        <p class="balance"><i class="fas fa-wallet"></i> Solde : {{ app.user.balance }}€</p>
+                        <p class="balance"><i class="fas fa-wallet"></i> {{ 'pay'|trans({}, 'index_page')|raw }}{{ app.user.balance }}€</p>
                     </div>
                 </div>
             </div>
@@ -28,7 +28,7 @@
             <div class="account-sections">
                 <!-- Section Informations Personnelles -->
                 <section class="account-section">
-                    <h2>Informations Personnelles</h2>
+                    {{ 'personal'|trans({}, 'index_page')|raw }}
                     <div class="forms-container">
                         <form method="post" class="account-form">
                             <div class="form-group">
@@ -45,9 +45,9 @@
 
                         <form method="post" class="account-form">
                             <div class="form-group">
-                                <label>Mot de passe</label>
+                                {{ 'password'|trans({}, 'index_page')|raw }}
                                 <div class="input-wrapper">
-                                    <input type="password" name="password" placeholder="Nouveau mot de passe" required>
+                                    <input type="password" name="password" placeholder={{ 'new_password'|trans({}, 'index_page')|raw }} required>
                                     <button type="submit" class="edit-button">
                                         <i class="fas fa-check"></i>
                                     </button>
@@ -58,7 +58,7 @@
 
                         <form method="post" class="account-form">
                             <div class="form-group">
-                                <label>Nom d'utilisateur</label>
+                                {{ 'user_name'|trans({}, 'index_page')|raw }}
                                 <div class="input-wrapper">
                                     <input type="text" name="username" value="{{ app.user.username }}" required>
                                     <button type="submit" class="edit-button">
@@ -71,11 +71,11 @@
 
                         <form method="post" enctype="multipart/form-data" class="account-form">
                             <div class="form-group">
-                                <label>Photo de profil</label>
+                                {{ 'picture_user'|trans({}, 'index_page')|raw }}
                                 <div class="file-input-wrapper">
                                     <input type="file" name="profilePicture" accept="image/*" id="profilePicture" class="file-input" required>
                                     <label for="profilePicture" class="file-label">
-                                        <i class="fas fa-upload"></i> Choisir une image
+                                        <i class="fas fa-upload"></i> {{ 'choice_picture'|trans({}, 'index_page')|raw }}
                                     </label>
                                     <button type="submit" class="edit-button">
                                         <i class="fas fa-check"></i>
@@ -89,17 +89,17 @@
 
                 <!-- Section Gestion du Solde -->
                 <section class="account-section">
-                    <h2>Ajouter des Fonds</h2>
+                    {{ 'add_funds'|trans({}, 'index_page')|raw }}
                     <form method="post" class="account-form balance-form">
                         <div class="form-group">
-                            <label>Montant à ajouter</label>
+                            {{ 'add_detail'|trans({}, 'index_page')|raw }}
                             <div class="input-wrapper">
                                 <div class="balance-input">
-                                    <input type="number" name="balance" min="1" step="1" placeholder="Montant" required>
+                                    <input type="number" name="balance" min="1" step="1" placeholder={{ 'amount'|trans({}, 'index_page')|raw }} required>
                                     <span class="currency">€</span>
                                 </div>
                                 <button type="submit" class="add-funds-button">
-                                    <i class="fas fa-plus"></i> Ajouter
+                                    <i class="fas fa-plus"></i> {{ 'add'|trans({}, 'index_page')|raw }}
                                 </button>
                             </div>
                             <input type="hidden" name="type" value="balance">
@@ -110,9 +110,9 @@
                 <!-- Section Mes Articles -->
                 <section class="account-section">
                     <div class="section-header">
-                        <h2>Mes Articles Publiés</h2>
+                        {{ 'published_article'|trans({}, 'index_page')|raw }}
                         <a href="{{ path('SellPage') }}" class="new-article-button">
-                            <i class="fas fa-plus"></i> Nouvel Article
+                            <i class="fas fa-plus"></i> {{ 'new_article'|trans({}, 'index_page')|raw }}
                         </a>
                     </div>
                     <div class="articles-grid">
@@ -122,7 +122,7 @@
                                      <img src="{{ asset('uploads/images/articles/' ~ article.image) }}" alt="{{ article.name }}">
                                     <div class="article-overlay">
                                         <a href="{{ path('app_detail', {'uid': article.uid}) }}" class="view-button">
-                                            <i class="fas fa-eye"></i> Voir
+                                            <i class="fas fa-eye"></i> {{ 'see'|trans({}, 'index_page')|raw }}
                                         </a>
                                     </div>
                                 </div>
@@ -130,16 +130,16 @@
                                     <h3>{{ article.name }}</h3>
                                     <div class="article-meta">
                                         <p class="price">{{ article.price }}€</p>
-                                        <p class="status">En vente</p>
+                                        <p class="status">{{ 'for_sale'|trans({}, 'index_page')|raw }}</p>
                                     </div>
                                 </div>
                             </div>
                         {% else %}
                             <div class="no-articles">
                                 <i class="fas fa-box-open"></i>
-                                <p>Vous n'avez pas encore publié d'articles.</p>
+                                {{ 'text_exception'|trans({}, 'index_page')|raw }}
                                 {# <a href="{{ path('SellPage') }}" class="new-article-button">
-                                    <i class="fas fa-plus"></i> Publier mon premier article
+                                    <i class="fas fa-plus"></i> {{ 'publish'|trans({}, 'index_page')|raw }}
                                 </a> #}
                             </div>
                         {% endfor %}
@@ -148,7 +148,7 @@
 
                 <!-- Section Mes Achats -->
                 <section class="account-section">
-                    <h2>Mes Factures</h2>
+                    {{ 'invoice'|trans({}, 'index_page')|raw }}
                     <div class="invoices-grid">
                         <div class="invoice-card">
                             <div class="invoice-header">
@@ -158,24 +158,24 @@
                             <div class="invoice-content">
                                 <div class="invoice-details">
                                     <div class="detail-group">
-                                        <label>Montant</label>
+                                        <label>{{ 'amount'|trans({}, 'index_page')|raw }}</label>
                                         <p>1299 €</p>
                                     </div>
                                     <div class="detail-group">
-                                        <label>Adresse</label>
-                                        <p>123 Rue de la Paix</p>
+                                        {{ 'address'|trans({}, 'index_page')|raw }}
+                                        {{ 'name_address'|trans({}, 'index_page')|raw }}
                                     </div>
                                     <div class="detail-group">
-                                        <label>Ville</label>
-                                        <p>Paris</p>
+                                        {{ 'city'|trans({}, 'index_page')|raw }}
+                                        {{ 'name_city'|trans({}, 'index_page')|raw }}
                                     </div>
                                     <div class="detail-group">
-                                        <label>Code Postal</label>
+                                        {{ 'postal'|trans({}, 'index_page')|raw }}
                                         <p>75000</p>
                                     </div>
                                 </div>
                                 <a href="#" class="download-button">
-                                    <i class="fas fa-download"></i> Télécharger
+                                    <i class="fas fa-download"></i> {{ 'download'|trans({}, 'index_page')|raw }}
                                 </a>
                             </div>
                         </div>

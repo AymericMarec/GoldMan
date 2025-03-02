@@ -1,0 +1,122 @@
+article_goldman:
+  "GOLDMAN - Tous les Articles"
+all:
+  "<h1>Tous les Articles</h1>"
+search:
+  "Rechercher un article..."
+minimum:
+  "<label>Prix minimum</label>"
+poor_filter:
+  "GOLDMAN est une plateforme de luxe. L'absence d'un filtre de prix maximum est volontaire : si votre budget est limité, nous vous invitons à visiter d'autres boutiques."
+sort:
+  "Trier par prix"
+descending:
+  "Descending price"
+increasing:
+  "Increasing price"
+apply:
+  "Appliquer"
+discover:
+  "Découvrir"
+not_results:
+  "<p>Aucun article trouvé</p>"
+previous:
+  "Précédent"
+next:
+  "Suivant"
+published:
+  "Publié le "
+picture:
+  "Photo de profil"
+by:
+  "Par "
+available:
+  "Quantité disponible : "
+not_available:
+  "Stock non disponible."
+add_cart:
+  "Ajouter au panier"
+warning:
+  "Vous ne pouvez pas ajouter votre propre article au panier."
+save:
+  "Sauvegarder"
+delete:
+  "Supprimer"
+account_goldman:
+  "GOLDMAN - Mon Compte"
+pay:
+  "Solde : "
+personal:
+  "<h2>Informations Personnelles</h2>"
+password:
+  "<label>Mot de passe</label>"
+new_password:
+  "Nouveau mot de passe"
+user_name:
+  "<label>Nom d'utilisateur</label>"
+picture_user:
+  "<label>Photo de profil</label>"
+choice_picture:
+  "Choisir une image"
+add_funds:
+  "<h2>Ajouter des Fonds</h2>"
+add_detail:
+  "<label>Montant à ajouter</label>"
+amount:
+  "Montant"
+add:
+  "Ajouter"
+published_article:
+  "<h2>Mes Articles Publiés</h2>"
+new_article:
+  "Nouvel Article"
+see:
+  "Voir"
+for_sale:
+  "En vente"
+text_exception:
+  "<p>Vous n'avez pas encore publié d'articles.</p>"
+publish:
+  "Publier mon premier article"
+invoices:
+  "<h2>Mes Factures</h2>"
+address:
+  <label>Adresse</label>
+name_address:
+  <p>123 Rue de la Paix</p>
+city:
+  <label>Ville</label>
+name_city:
+  <p>Paris</p>
+postal:
+  "<label>Zip Code</label>"
+download:
+  "Télécharger"
+sell_goldman:
+  "GOLDMAN - Vendre un article"
+sell:
+  "<h1>Vendre un Article</h1>"
+text1:
+  "Publiez votre bijou sur GOLDMAN"
+picture_article:
+  "Photo du produit"
+text2:
+  "Glissez votre image ici"
+text3:
+  "ou cliquez pour sélectionner"
+name:
+  "Nom de l'article"
+ex_name:
+  "Ex: Bracelet en or 18 carats"
+description:
+  "Description"
+ex_desc:
+  "Décrivez votre article en détail (matériaux, dimensions, état, etc.)"
+price:
+  "Prix"
+quantity:
+  "Quantité en stock"
+unit:
+  "unité(s)"
+publish_article:
+  "Publier l'article"

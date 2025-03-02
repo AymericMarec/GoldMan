@@ -1,4 +1,4 @@
-connection_goldman:
+registration_goldman:
   "GOLDMAN - Inscription"
 registration:
   "Inscription"
@@ -12,3 +12,7 @@ login:
   "Se connecter"
 registered:
   "Déjà inscrit ? "
+username:
+  "Nom d'utilisateur"
+agree:
+  "J'accepte les conditions d'utilisation"

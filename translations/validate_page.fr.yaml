@@ -1,0 +1,36 @@
+validate_goldman:
+  "GOLDMAN - Validation de commande"
+validate:
+  "<h1>Finalisation de la commande</h1>"
+information:
+  "Renseignez vos informations de livraison"
+address:
+  "<label>Adresse de livraison</label>"
+name_address:
+  "123 rue de la Paix"
+city:
+  "<label>Ville</label>"
+name_city:
+  "Paris"
+postal:
+  "<label>Code Postal</label>"
+order:
+  "<h3>Récapitulatif de la commande</h3>"
+see:
+  "<span>Total des articles</span>"
+delivery:
+  "<span>Frais de livraison</span>"
+free:
+  "<span>Gratuit</span>"
+pay:
+  <span>Total à payer</span>
+confirm:
+  "Confirmer la commande"
+return:
+  "Retour au panier"
+insufficient:
+  "<h2>Solde insuffisant</h2>"
+error:
+  "<p>Votre solde actuel ne permet pas de finaliser cet achat.</p>"
+add:
+  "Ajouter des fonds"

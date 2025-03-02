@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}GOLDMAN - Administration{% endblock %}
+{% block title %}{{ 'admin_goldman'|trans({}, 'admin_page')|raw }}{% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/header.css') }}">
@@ -14,8 +14,8 @@
     <main class="admin-menu">
         <div class="menu-container">
             <div class="menu-header">
-                <h1>Administration GOLDMAN</h1>
-                <p>Gérez les utilisateurs et les articles de votre boutique</p>
+                {{ 'admin'|trans({}, 'admin_page')|raw }}
+                {{ 'text1'|trans({}, 'admin_page')|raw }}
             </div>
 
             <div class="menu-grid">
@@ -23,9 +23,9 @@
                     <div class="menu-icon">
                         <i class="fas fa-users"></i>
                     </div>
-                    <h2 class="menu-title">Gestion des Utilisateurs</h2>
+                    <h2 class="menu-title">{{ 'user_management'|trans({}, 'admin_page')|raw }}</h2>
                     <p class="menu-description">
-                        Gérez les comptes utilisateurs, les droits administrateurs et les suppressions
+                        {{ 'text2'|trans({}, 'admin_page')|raw }}
                     </p>
                 </a>
 
@@ -33,9 +33,9 @@
                     <div class="menu-icon">
                         <i class="fas fa-gem"></i>
                     </div>
-                    <h2 class="menu-title">Gestion des Articles</h2>
+                    <h2 class="menu-title">{{ 'article__management'|trans({}, 'admin_page')|raw }}</h2>
                     <p class="menu-description">
-                        Supervisez tous les articles en vente, modérez et supprimez si nécessaire
+                        {{ 'text3'|trans({}, 'admin_page')|raw }}
                     </p>
                 </a>
             </div>

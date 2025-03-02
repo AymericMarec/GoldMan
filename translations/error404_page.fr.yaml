@@ -1,0 +1,11 @@
+error_goldman:
+  "GOLDMAN - Page introuvable"
+not_found:
+  "Page introuvable"
+text:
+  "La page que vous recherchez semble avoir disparu dans notre coffre-fort.\n
+  Peut-être a-t-elle été déplacée ou n'existe plus."
+return:
+  "Retour à l'accueil"
+previous_error:
+  "Page précédente"

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}GOLDMAN - Profil de {{ user.username }}{% endblock %}
+{% block title %}{{ 'profile_goldman'|trans({}, 'login_page')|raw }}{{ user.username }}{% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/header.css') }}">
@@ -15,14 +15,14 @@
         <div class="account-container">
             <div class="account-header">
                 <div class="profile-image">
-                    <img src="{{ asset('images/' ~ user.profilePicture) }}" alt="Photo de profil">
+                    <img src="{{ asset('images/' ~ user.profilePicture) }}" alt={{ 'picture'|trans({}, 'login_page')|raw }}>
                 </div>
                 <h1>{{ user.username }}</h1>
                 <p class="user-email">{{ user.email }}</p>
             </div>
 
             <section class="account-section">
-                <h2>Articles Publiés par {{ user.username }}</h2>
+                <h2>{{ 'publish'|trans({}, 'login_page')|raw }}{{ user.username }}</h2>
                 <div class="articles-grid">
                     {% for article in articles %}
                         <div class="article-card">
@@ -30,11 +30,11 @@
                             <div class="article-info">
                                 <h3>{{ article.name }}</h3>
                                 <p class="price">{{ article.price }}€</p>
-                                <a href="{{ path('app_detail', {'uid': article.uid}) }}" class="view-button">Voir</a>
+                                <a href="{{ path('app_detail', {'uid': article.uid}) }}" class="view-button">{{ 'view'|trans({}, 'login_page')|raw }}</a>
                             </div>
                         </div>
                     {% else %}
-                        <p class="no-articles">Cet utilisateur n'a pas encore publié d'articles.</p>
+                        <p class="no-articles">{{ 'text'|trans({}, 'login_page')|raw }}</p>
                     {% endfor %}
                 </div>
             </section>

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}GOLDMAN - Administration des articles{% endblock %}
+{% block title %}{{ 'admin_article_goldman'|trans({}, 'admin_page')|raw }}{% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/header.css') }}">
@@ -14,7 +14,7 @@
     <main class="admin-page">
         <div class="admin-container">
             <div class="admin-header">
-                <h1>Gestion des Articles</h1>
+                {{ 'article__management'|trans({}, 'admin_page')|raw }}
             </div>
 
             <div class="articles-grid">
@@ -29,7 +29,7 @@
                             <p class="article-price">{{ article.price }}€</p>
                             <div class="article-actions">
                                 <a href="{{ path('app_detail', {'uid': article.uid}) }}" class="view-button">
-                                    <i class="fas fa-eye"></i> Voir
+                                    <i class="fas fa-eye"></i> {{ 'see'|trans({}, 'admin_page')|raw }}
                                 </a>
                                 <button class="delete-button" data-uid="{{article.uid}}" onclick="Delete(this)">
                                     <i class="fas fa-trash"></i>
@@ -39,7 +39,7 @@
                     </div>
                 {% else %}
                     <div class="empty-message">
-                        <p>Aucun article n'est disponible pour le moment.</p>
+                        {{ 'text4'|trans({}, 'admin_page')|raw }}
                     </div>
                 {% endfor %}
             </div>
