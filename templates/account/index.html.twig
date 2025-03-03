@@ -16,10 +16,10 @@
             <div class="account-header">
                 <div class="header-content">
                     <div class="profile-image">
-                        <img src="{{ asset('images/' ~ app.user.profilePicture) }}" alt="Photo de profil">
+                        <img src="{{ asset('uploads/images/profilPicture/' ~ app.user.profilePicture) }}" >
                     </div>
                     <div class="user-info">
-                        <h1>{{ app.user.username }}</h1>
+                        <h1>{{ user.username }}</h1>
                         <p class="balance"><i class="fas fa-wallet"></i> Solde : {{ app.user.balance }}€</p>
                     </div>
                 </div>

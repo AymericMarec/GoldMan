@@ -14,7 +14,7 @@
     <main class="detail-page">
         <div class="detail-container">
             <div class="article-image">
-                <img src="{{ asset('uploads/images/articles/' ~ article.image) }}" alt="{{ article.name }}">
+                <img class="pdp"src="{{ asset('uploads/images/articles/' ~ article.image) }}" alt="{{ article.name }}">
             </div>
 
             <div class="article-info">
@@ -26,11 +26,7 @@
                     <p>Publié le {{ article.publicationDate|date('d/m/Y') }}</p>
                     <div class="seller-info">
                         <div class="seller-image">
-                            {% if article.CreatorID.profilePicture %}
-                                <img src="{{ asset('images/' ~ article.CreatorID.profilePicture) }}" alt="Photo de profil">
-                            {% else %}
-                                <i class="fas fa-user"></i>
-                            {% endif %}
+                        <a href="/account?uid={{ app.user.uid }}"><img src="{{ asset('uploads/images/profilPicture/' ~ app.user.profilePicture) }}" ></a>
                         </div>
                         <p>Par {{ article.CreatorID.username }}</p>
                     </div>

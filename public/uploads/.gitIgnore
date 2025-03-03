@@ -1,1 +1,4 @@
 images/*
+!images/profilPicture/
+images/profilPicture/*
+!images/profilPicture/defaultPP.png

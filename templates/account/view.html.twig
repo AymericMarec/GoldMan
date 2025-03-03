@@ -15,7 +15,7 @@
         <div class="account-container">
             <div class="account-header">
                 <div class="profile-image">
-                    <img src="{{ asset('images/' ~ user.profilePicture) }}" alt="Photo de profil">
+                        <img src="{{ asset('uploads/images/profilPicture/' ~ user.profilePicture) }}" >
                 </div>
                 <h1>{{ user.username }}</h1>
                 <p class="user-email">{{ user.email }}</p>

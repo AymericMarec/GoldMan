@@ -19,9 +19,11 @@ final class AccountController extends AbstractController{
     {
         $userToShow = $request->query->get('uid');
         $user = $this->getUser();
+        //if user is not logged in
         if (!$user) {
             return $this->redirectToRoute('login');
         }
+        //if the user goes on his page
         if($userToShow == null){
             return $this->ShowUser();
         }else {
@@ -45,9 +47,6 @@ final class AccountController extends AbstractController{
     }
     public function ShowOtherUser($uid,UserRepository $userRepository):Response{
         $user = $userRepository->findOneBy(['uid' => $uid]);
-        if(!$user){
-            //Load Error page , user doesnt exist
-        }
         $articles = $user->getArticles();
         //Load Page with OtherUserInfo
         return $this->render('account/view.html.twig', [
