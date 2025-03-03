@@ -6,120 +6,8 @@
     <link rel="stylesheet" href="{{ asset('css/header.css') }}">
     <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
     <link rel="stylesheet" href="{{ asset('css/account.css') }}">
-    <style>
-        .account-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
+    <link rel="stylesheet" href="{{ asset('css/sell.css') }}">
 
-        .account-header h1 {
-            color: #d4af37;  /* Couleur or caractéristique de GOLDMAN */
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .account-header .subtitle {
-            color: #999;  /* Gris clair pour le sous-titre */
-            font-size: 1.1rem;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        /* Style pour que le formulaire Symfony garde l'apparence actuelle */
-        .sell-form div > label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #333;
-            font-weight: 500;
-        }
-
-        .sell-form div > input,
-        .sell-form div > textarea {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-
-        /* Cache le label du bouton submit généré par Symfony */
-        .sell-form div > label[for$="_save"] {
-            display: none;
-        }
-
-        /* Styles spécifiques pour le formulaire Symfony */
-        .sell-form div {
-            margin-bottom: 1.5rem;
-        }
-
-        .sell-form label {
-            color: #d4af37 !important;
-            font-family: 'Cormorant Garamond', serif !important;
-            font-size: 1.1rem !important;
-            margin-bottom: 0.8rem !important;
-            display: block !important;
-        }
-
-        .sell-form input[type="text"],
-        .sell-form input[type="number"],
-        .sell-form textarea,
-        .sell-form select {
-            width: 100%;
-            padding: 0.8rem;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid #333;
-            border-radius: 4px;
-            color: #fff;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .sell-form button[type="submit"] {
-            background: #d4af37;
-            color: #000;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-family: 'Cormorant Garamond', serif;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .sell-form button[type="submit"]:hover {
-            background: #c4a032;
-            transform: translateY(-2px);
-        }
-
-        /* Style pour l'upload d'image */
-        .sell-form input[type="file"] {
-            display: none;
-        }
-
-        .product-image-label {
-            display: block;
-            padding: 2rem;
-            border: 2px dashed #333;
-            border-radius: 8px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .product-image-label:hover {
-            border-color: #d4af37;
-        }
-
-        .image-preview {
-            margin-top: 1rem;
-            width: 100%;
-            height: 200px;
-            background-size: cover;
-            background-position: center;
-            border-radius: 4px;
-            display: none;
-        }
-    </style>
 {% endblock %}
 
 {% block body %}
@@ -227,19 +115,5 @@
 {% endblock %}
 
 {% block javascripts %}
-<script>
-document.getElementById('productImage').addEventListener('change', function(e) {
-    const file = e.target.files[0];
-    const preview = document.getElementById('imagePreview');
-    
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            preview.style.backgroundImage = `url(${e.target.result})`;
-            preview.style.display = 'block';
-        }
-        reader.readAsDataURL(file);
-    }
-});
-</script>
+    <script src="{{ asset('js/sell.js') }}"></script>
 {% endblock %}
