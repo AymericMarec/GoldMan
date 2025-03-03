@@ -71,8 +71,9 @@ final class AccountController extends AbstractController{
                 $user->setUsername($newUserName);
                 break;
             case 'profilePicture':
-                $newUserName = $request->request->get('profilePicture');
-                $user->setUsername($newUserName);
+                $newProfilePicture = $request->files->get('profilePicture');
+                $newProfilePicture->move("/uploads/image/profilPicture/");
+                $user->setProfilePicture($newProfilePicture);
                 break;
             case 'balance':
                 $addBalance = $request->request->get('balance');
