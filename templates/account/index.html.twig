@@ -156,37 +156,44 @@
                         <h2>{{ 'Invoice'|trans({}, 'index_page')|raw }}</h2>
                     </div>
                     <div class="invoices-grid">
-                        <div class="invoice-card">
-                            <div class="invoice-header">
-                                <span class="invoice-number">#INV-2024-001</span>
-                                <span class="invoice-date">15/03/2024</span>
+                        {% if invoices is empty %}
+                            <div class="no-invoices">
+                                <i class="fas fa-receipt"></i>
+                                <p>{{ 'no_invoice'|trans({}, 'index_page')|raw }}</p>
                             </div>
-                            <div class="invoice-content">
-                                <div class="invoice-details">
-                                    <div class="detail-group">
-                                        <label>{{ 'amount'|trans({}, 'index_page')|raw }}</label>
-                                        <p>1299 €</p>
+                        {% else %}
+                            {% for invoice in invoices %}
+                                <div class="invoice-card">
+                                    <div class="invoice-header">
+                                        <span class="invoice-number">#INV-{{ invoice.id }}</span>
+                                        <span class="invoice-date">{{ invoice.transactionDate|date('d/m/Y') }}</span>
                                     </div>
-                                    <div class="detail-group">
-                                        {{ 'address'|trans({}, 'index_page')|raw }}
-                                        {{ 'name_address'|trans({}, 'index_page')|raw }}
-                                    </div>
-                                    <div class="detail-group">
-                                        {{ 'city'|trans({}, 'index_page')|raw }}
-                                        {{ 'name_city'|trans({}, 'index_page')|raw }}
-                                    </div>
-                                    <div class="detail-group">
-                                        {{ 'postal'|trans({}, 'index_page')|raw }}
-                                        <p>75000</p>
+                                    <div class="invoice-content">
+                                        <div class="invoice-details">
+                                            <div class="detail-group">
+                                                <label>{{ 'amount'|trans({}, 'index_page')|raw }}</label>
+                                                <p>{{ invoice.amount }}€</p>
+                                            </div>
+                                            <div class="detail-group">
+                                                <label>{{ 'address'|trans({}, 'index_page')|raw }}</label>
+                                                <p>{{ invoice.billingAdress }}</p>
+                                            </div>
+                                            <div class="detail-group">
+                                                <label>{{ 'city'|trans({}, 'index_page')|raw }}</label>
+                                                <p>{{ invoice.billingCity }}</p>
+                                            </div>
+                                            <div class="detail-group">
+                                                <label>{{ 'postal'|trans({}, 'index_page')|raw }}</label>
+                                                <p>{{ invoice.postCode }}</p>
+                                            </div>
+                                        </div>
+                                        <a href="#" class="download-button">
+                                            <i class="fas fa-download"></i> {{ 'download'|trans({}, 'index_page')|raw }}
+                                        </a>
                                     </div>
                                 </div>
-                                <a href="#" class="download-button">
-                                    <i class="fas fa-download"></i> {{ 'download'|trans({}, 'index_page')|raw }}
-                                </a>
-                            </div>
-                        </div>
-
-                        <!-- Répéter pour d'autres factures... -->
+                            {% endfor %}
+                        {% endif %}
                     </div>
                 </section>
             </div>
