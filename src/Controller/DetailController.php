@@ -57,7 +57,7 @@ final class DetailController extends AbstractController
             return $this->redirectToRoute('app_detail', ['uid' => $uid]);
         }
         $stock = $article->getStock();
-        if($stock <= 0){
+        if($stock->getNbStock() <= 0){
             $this->addFlash('error', 'L\'article n\'est plus en stock');
             return $this->redirectToRoute('app_detail', ['uid' => $uid]);
         }
