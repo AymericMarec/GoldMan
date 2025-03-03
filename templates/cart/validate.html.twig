@@ -74,10 +74,10 @@
                    {{ 'insufficient'|trans({}, 'validate_page')|raw }}
                     {{ 'error'|trans({}, 'validate_page')|raw }}
                     <div class="error-actions">
-                        <a href="/account" class="primary-button">
+                        <a href="{{ path('AccountPage') }}" class="primary-button">
                             <i class="fas fa-wallet"></i> {{ 'add'|trans({}, 'validate_page')|raw }}
                         </a>
-                        <a href="/cart" class="secondary-button">
+                        <a href="{{ path('cart') }}" class="secondary-button">
                             <i class="fas fa-arrow-left"></i> {{ 'return'|trans({}, 'validate_page')|raw }}
                         </a>
                     </div>
