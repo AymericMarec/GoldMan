@@ -3,7 +3,7 @@ cart_goldman:
 my_cart:
   "<h1>My Cart</h1>"
 cart:
-  "in your cart"
+  " in your cart"
 subtotal:
   "<span>Subtotal</span>"
 delivery_costs:

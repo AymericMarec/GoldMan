@@ -60,7 +60,7 @@
                                     <span>{{ total }}€</span>
                                 </div>
                             </div>
-                            <a href="/cart/validate" class="checkout-button">
+                            <a href="{{ path('validate') }}" class="checkout-button">
                                 <i class="fas fa-lock"></i> {{ 'payment'|trans({}, 'cart_page')|raw }}
                             </a>
                         </div>
