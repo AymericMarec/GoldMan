@@ -37,22 +37,22 @@
                                         </div>
                                     </div>
                                     <div class="cart-item-actions">
-                                        <form action="{{ path('removeQt', { 'uid': cart.articleID.uid }) }}" method="post">
+                                        <a href="{{ path('removeQt', { 'uid': cart.articleID.uid }) }}" >
                                             <button type="submit" >
                                                 -
                                             </button>
-                                        </form>
+                                        </a>
                                         <p>{{cart.quantity}}</p>
-                                        <form action="{{ path('addQt', { 'uid': cart.articleID.uid }) }}" method="post">
-                                            <button type="submit">
+                                        <a href="{{ path('addQt', { 'uid': cart.articleID.uid }) }}" >
+                                            <button type="submit" >
                                                 +
                                             </button>
-                                        </form>
-                                        <form action="{{ path('RemoveItem', { 'uid': cart.articleID.uid , 'nb' : cart.quantity}) }}" method="post">
+                                        </a>
+                                        <a href="{{ path('RemoveItem', { 'uid': cart.articleID.uid}) }}">
                                             <button type="submit" class="remove-button">
                                                 <i class="fas fa-trash"></i>
                                             </button>
-                                        </form>
+                                        </a>
                                     </div>
                                 </div>
                             {% endfor %}

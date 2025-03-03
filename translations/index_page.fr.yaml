@@ -38,6 +38,10 @@ add_cart:
   "Ajouter au panier"
 warning:
   "Vous ne pouvez pas ajouter votre propre article au panier."
+warningstock:
+  "Article indisponible"
+warningincart:
+  "L'article est déjà dans le panier !"
 save:
   "Sauvegarder"
 delete:

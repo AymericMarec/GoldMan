@@ -61,14 +61,17 @@
                 </div>
 
                 <div class="article-actions">
-                    {% if app.user and app.user != article.creatorID %}
+                    {% if app.user and app.user != article.creatorID and article.stock.nbStock > 0 and isincart == false %}
                         <form action="{{ path('app_add_to_cart', {uid: article.uid}) }}" method="POST" id="add-to-cart-form">
                             <button type="submit" class="add-to-cart-button">{{ 'add_cart'|trans({}, 'index_page')|raw }}</button>
                         </form>
-                    {% elseif app.user %}
+                    {% elseif article.stock.nbStock <= 0 %}
+                        <p class="warning-message">{{ 'warningstock'|trans({}, 'index_page')|raw }}</p>
+                    {% elseif isincart == false %}
                         <p class="warning-message">{{ 'warning'|trans({}, 'index_page')|raw }}</p>
+                    {% else %}
+                        <p class="warning-message">{{ 'warningincart'|trans({}, 'index_page')|raw }}</p>
                     {% endif %}
-
                     {% if editable %}
                         <div class="edit-actions">
                             <button id="save" class="save-button" style="display:none;" data-uid={{article.uid}} onclick="Save()">
@@ -109,10 +112,10 @@
                             // Afficher la notification
                             notification.style.display = 'flex';
                             
-                            // Cacher la notification après 3 secondes
+                            // Rediriger vers la page du panier après un court délai
                             setTimeout(() => {
-                                notification.style.display = 'none';
-                            }, 3000);
+                                window.location.href = '{{ path('cart') }}';
+                            }, 1500); // Redirection après 1.5 secondes
                         }
                     });
                 });

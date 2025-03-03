@@ -17,6 +17,7 @@ final class DetailController extends AbstractController
     #[Route('/detail/{uid}', name: 'app_detail')]
     public function index(string $uid, EntityManagerInterface $entityManager): Response
     {
+        dump("coucou");
         $article = $entityManager->getRepository(Article::class)->findOneBy(['uid' => $uid]);
 
         if (!$article) {
@@ -31,16 +32,33 @@ final class DetailController extends AbstractController
         }else {
             $editable = false;
         }
+
+        $item = $entityManager->getRepository(Cart::class)->createQueryBuilder('c')
+        ->where('c.articleID = :article')
+        ->andWhere('c.UserID = :user')
+        ->setParameter('article', $article)
+        ->setParameter('user', $user)
+        ->getQuery()
+        ->getOneOrNullResult();
+
+        if (!$item) {
+            $incart = false;
+        } else {
+            $incart = true;
+        }
+
         return $this->render('detail/index.html.twig', [
             'article' => $article,
             'user' => $user,
-            "editable"=> $editable
+            "editable"=> $editable,
+            "isincart"=> $incart,
         ]);
     }
 
-    #[Route('/detail/{uid}/add-to-cart', name: 'app_add_to_cart')]
-    public function addToCart(string $uid, EntityManagerInterface $entityManager): RedirectResponse
+    #[Route('/detail/{uid}/add-to-cart', name: 'app_add_to_cart',methods:'POST')]
+    public function addToCart(string $uid, EntityManagerInterface $entityManager): Response
     {
+        dump("coucou");
         $user = $this->getUser();
         if (!$user) {
             return $this->redirectToRoute('app_login');
@@ -54,11 +72,13 @@ final class DetailController extends AbstractController
 
         if ($user === $article->getCreatorID()) {
             $this->addFlash('error', 'Vous ne pouvez pas ajouter votre propre article au panier.');
+            dump("coucou");
             return $this->redirectToRoute('app_detail', ['uid' => $uid]);
         }
         $stock = $article->getStock();
         if($stock->getNbStock() <= 0){
             $this->addFlash('error', 'L\'article n\'est plus en stock');
+            dump("coucou");
             return $this->redirectToRoute('app_detail', ['uid' => $uid]);
         }
 
@@ -73,9 +93,10 @@ final class DetailController extends AbstractController
 
         $entityManager->persist($cart);
         $entityManager->flush();
-
+        dump("coucou");
         $this->addFlash('success', 'L\'article a été ajouté à votre panier.');
-
-        return $this->redirectToRoute('app_detail', ['uid' => $uid]);
+        dump("coucou2");
+        return $this->redirectToRoute('cart');
+        
     }
 }

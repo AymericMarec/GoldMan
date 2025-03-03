@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Cart;
+use App\Entity\Article;
 use App\Entity\User;
 use App\Entity\Invoice;
 use Doctrine\ORM\EntityManagerInterface;
@@ -27,7 +28,7 @@ final class CartController extends AbstractController
         $totalSold = 0;
         foreach($carts as $id => $cart) {
             $article = $cart->getArticleID();
-            $totalSold += $article->getPrice();
+            $totalSold += $article->getPrice() * $cart->getQuantity();
         }
         return $this->render('cart/cart.html.twig', [
             'carts' => $carts,
@@ -46,7 +47,7 @@ final class CartController extends AbstractController
         $totalSold = 0;
         foreach($carts as $id => $cart) {
             $article = $cart->getArticleID();
-            $totalSold += $article->getPrice();
+            $totalSold += $article->getPrice() * $cart->getQuantity();
         }
         $CanBuy = true;
         if ($totalSold > $user->getBalance()){
@@ -85,80 +86,90 @@ final class CartController extends AbstractController
         return $this->redirectToRoute('home');
     }
 
-    #[Route('/cart/remove', name: 'RemoveItem',methods:'POST')]
-    public function RemoveInvoice(EntityManagerInterface $em, string $uid, int $nb): Response
+    #[Route('/cart/remove/{uid}', name: 'RemoveItem',methods:'GET')]
+    public function RemoveInvoice(EntityManagerInterface $em, string $uid): Response
     {
         /** @var User $user */
         $user = $this->getUser();
 
-        $article = $entityManager->getRepository(Article::class)->findOneBy(['uid' => $uid]);
+        $article = $em->getRepository(Article::class)->findOneBy(['uid' => $uid]);
 
         
-        $item = $entityManager->getRepository(Cart::class)->findOneBy(
-            ['articleID' => $article,
-            'user' => $user]
-        );
+        $item = $em->getRepository(Cart::class)->createQueryBuilder('c')
+            ->where('c.articleID = :article')
+            ->andWhere('c.UserID = :user')
+            ->setParameter('article', $article)
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getOneOrNullResult();
+
 
         $em->remove($item);
         $em->flush(); 
 
         $stock = $article->getStock();
-        $stock->setNbStock($stock->getNbStock()-$nb);
+        $stock->setNbStock($stock->getNbStock()+$item->getQuantity());
         $em->persist($stock);
         $em->flush();
 
         return $this->redirectToRoute('cart');
     }
 
-    #[Route('/cart/addQt', name: 'addQt', methods: 'POST')]
+    #[Route('/cart/addQt/{uid}', name: 'addQt', methods: 'GET')]
     public function addQt(EntityManagerInterface $em, string $uid): Response
     {
         /** @var User $user */
         $user = $this->getUser();
-        
         $article = $em->getRepository(Article::class)->findOneBy(['uid' => $uid]);
-        $item = $em->getRepository(Cart::class)->findOneBy([
-            'articleID' => $article,
-            'user' => $user
-        ]);
+
+        $item = $em->getRepository(Cart::class)->createQueryBuilder('c')
+            ->where('c.articleID = :article')
+            ->andWhere('c.UserID = :user')
+            ->setParameter('article', $article)
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getOneOrNullResult();
+
 
         $stock = $article->getStock();
         
-        if ($stock > 0) {
-            //ici on enable le bouton - qui permet d'appeler removeQt
+        if ($stock->getNbStock() > 0) {
             $item->setQuantity($item->getQuantity() + 1);
             $stock->setNbStock($stock->getNbStock()-1);
-            $em->persist($item, $stock);
+            $em->persist($item);
+            $em->persist($stock);
             $em->flush();
         } else {
-            //ici on disable le bouton + qui permet d'appeler addQt pour empecher l'utilisateur de rajouter au panier plus d'item que le stock dispo
+            $this->addFlash('error', 'Maximum de stock atteint');
         }
-    
-        
         return $this->redirectToRoute('cart');
     }
 
-    #[Route('/cart/removeQt', name: 'removeQt', methods: 'POST')]
+    #[Route('/cart/removeQt/{uid}', name: 'removeQt', methods: 'GET')]
     public function removeQt(EntityManagerInterface $em, string $uid): Response
     {
         /** @var User $user */
         $user = $this->getUser();
         
         $article = $em->getRepository(Article::class)->findOneBy(['uid' => $uid]);
-        $item = $em->getRepository(Cart::class)->findOneBy([
-            'articleID' => $article,
-            'user' => $user
-        ]);
+        $item = $em->getRepository(Cart::class)->createQueryBuilder('c')
+            ->where('c.articleID = :article')
+            ->andWhere('c.UserID = :user')
+            ->setParameter('article', $article)
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getOneOrNullResult();
+
 
         $stock = $article->getStock();
         
         if ($item->getQuantity() > 1) {
             $item->setQuantity($item->getQuantity() - 1);
-            $stock->setNbStock($stock->getNbStock()-1);
-                //ici on enabled le bouton + qui permet d'appeler addQt
-            $em->persist($item, $stock);
+            $stock->setNbStock($stock->getNbStock()+1);
+            $em->persist( $stock);
+            $em->persist($item);
         } else {
-            //ici on disable le bouton - qui permet d'appeler removeQt pour qu'il y ai au moins toujours 1 en quantité
+            return $this->redirectToRoute('RemoveItem', ['uid'=> $article->getUid()]);
         }
 
         $em->flush();
