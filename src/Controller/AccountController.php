@@ -24,12 +24,12 @@ final class AccountController extends AbstractController{
             return $this->redirectToRoute('login');
         }
         $articles = $user->getArticles();
-        $bills = $user->getInvoices();
+        $invoices = $user->getInvoices();
         //Load Page with UserInfo
         return $this->render('account/index.html.twig', [
             'user' =>$user,
             'articles' =>$articles,
-            'bills' =>$bills,
+            'invoices' =>$invoices,
         ]);
     }
     #[Route('/account/{uid}', name: 'OtherAcountPage',methods:'GET')]

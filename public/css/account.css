@@ -27,9 +27,10 @@
 
 .header-content {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 2rem;
+    gap: 1.5rem;
     max-width: 600px;
     margin: 0 auto;
 }
@@ -37,7 +38,6 @@
 .profile-image {
     width: 150px;
     height: 150px;
-    margin: 0 auto 1.5rem;
     border-radius: 50%;
     overflow: hidden;
     border: 3px solid #d4af37;
@@ -49,23 +49,19 @@
     object-fit: cover;
 }
 
-.account-header h1 {
-    color: #d4af37;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
+.user-info {
+    text-align: center;
 }
 
-.user-info {
-    text-align: left;
-    flex-grow: 1;
+.account-header h1{
+    color: #d4af37;
 }
 
 .user-info h1 {
     color: #d4af37;
     font-family: 'Cormorant Garamond', serif;
     font-size: 2.5rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
 }
 
 .balance {
@@ -73,6 +69,7 @@
     font-size: 1.2rem;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
 }
 
@@ -281,6 +278,19 @@ button:hover {
         flex-direction: column;
         text-align: center;
         gap: 1rem;
+    }
+
+    .header-content {
+        padding: 1rem;
+    }
+    
+    .profile-image {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .user-info h1 {
+        font-size: 2rem;
     }
 }
 
@@ -571,6 +581,9 @@ button:hover {
     color: #d4af37;
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.8rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #333;
+    padding-bottom: 1rem;
 }
 
 .articles-grid {
@@ -1206,4 +1219,17 @@ textarea:focus {
     font-family: 'Montserrat', sans-serif;
     margin-top: 0.5rem;
     opacity: 0.7;
+}
+
+.cart-title {
+    color: #d4af37;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.subtitle {
+    color: #666;
+    font-size: 1.1rem;
+    font-family: 'Montserrat', sans-serif;
 } 
