@@ -62,6 +62,7 @@ final class DetailController extends AbstractController
         $cart = new Cart();
         $cart->setArticleID($article);
         $cart->setUserID($user);
+        $cart->setQuantity(1);
 
         $entityManager->persist($cart);
         $entityManager->flush();

@@ -37,9 +37,11 @@
                                         </div>
                                     </div>
                                     <div class="cart-item-actions">
-                                        <a href="/cart/remove/{{ cart.articleID.uid }}" class="remove-button">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
+                                        <form action="{{ path('RemoveItem', { 'uid': cart.articleID.uid , 'nb' : cart.quantity}) }}" method="post">
+                                            <button type="submit" class="remove-button">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             {% endfor %}

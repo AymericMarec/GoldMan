@@ -88,4 +88,29 @@ final class CartController extends AbstractController
         return $this->redirectToRoute('home');
     }
 
+    #[Route('/cart/remove', name: 'RemoveItem',methods:'POST')]
+    public function RemoveInvoice(EntityManagerInterface $em, string $uid, int $nb): Response
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+
+        $article = $entityManager->getRepository(Article::class)->findOneBy(['uid' => $uid]);
+
+        
+        $item = $entityManager->getRepository(Cart::class)->findOneBy(
+            ['articleID' => $article,
+            'user' => $user]
+        );
+
+        $em->remove($item);
+        $em->flush(); 
+
+        $stock = $article->getStock();
+        $stock->setNbStock($stock->getNbStock()-$nb);
+        $em->persist($stock);
+        $em->flush();
+
+        return $this->redirectToRoute('cart');
+    }
+
 }
