@@ -16,11 +16,15 @@
             <div class="account-header">
                 <div class="header-content">
                     <div class="profile-image">
-                        <img src="{{ asset('uploads/images/profilPicture/' ~ app.user.profilePicture) }}" >
+                        {% if user.profilePicture %}
+                            <img src="{{ asset('uploads/images/profilPicture/' ~ user.profilePicture) }}" alt="Photo de profil">
+                        {% else %}
+                            <img src="{{ asset('images/default-avatar.png') }}" alt="Photo de profil par défaut">
+                        {% endif %}
                     </div>
                     <div class="user-info">
                         <h1>{{ user.username }}</h1>
-                        <p class="balance"><i class="fas fa-wallet"></i> {{ 'pay'|trans({}, 'index_page')|raw }}{{ app.user.balance }}€</p>
+                        <p class="balance"><i class="fas fa-coins"></i> {{ 'pay'|trans({}, 'index_page')|raw }}{{ user.balance }}€</p>
                     </div>
                 </div>
             </div>
@@ -148,7 +152,9 @@
 
                 <!-- Section Mes Achats -->
                 <section class="account-section">
-                    {{ 'invoice'|trans({}, 'index_page')|raw }}
+                    <div class="section-header">
+                        <h2>{{ 'Invoice'|trans({}, 'index_page')|raw }}</h2>
+                    </div>
                     <div class="invoices-grid">
                         <div class="invoice-card">
                             <div class="invoice-header">
