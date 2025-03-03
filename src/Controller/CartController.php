@@ -68,9 +68,6 @@ final class CartController extends AbstractController
         foreach($carts as $id => $cart) {
             $article = $cart->getArticleID();
             $totalSold += $article->getPrice();
-            $stock = $article->getStock();
-            $stock->setNbStock($stock->getNbStock()-1);
-            $em->persist($stock);
             $em->remove($cart);
         }
         
