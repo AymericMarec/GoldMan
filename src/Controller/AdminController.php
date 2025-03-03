@@ -22,11 +22,13 @@ final class AdminController extends AbstractController{
             'users' => $users,   
         ]);
     }
+
     #[Route('/admin', name: 'adminMenuPage',methods:'GET')]
     public function ShowMenu(): Response
     {
         return $this->render('admin/menu.html.twig');
     }
+
     #[Route('/admin/user', name: 'DeleteUser',methods:'DELETE')]
     public function DeleteUser(EntityManagerInterface $em,Request $request)
     {
@@ -36,6 +38,7 @@ final class AdminController extends AbstractController{
         $em->flush();
         return new Response("OK");
     }
+
     #[Route('/admin/user', name: 'SwichAdmin',methods:'PUT')]
     public function SwichAdmin(EntityManagerInterface $em,Request $request)
     {
@@ -55,6 +58,7 @@ final class AdminController extends AbstractController{
             'articles' => $articles
         ]);
     }
+    
     #[Route('/admin/article', name: 'DeleteArticle',methods:'DELETE')]
     public function DeleteArticle(EntityManagerInterface $em,Request $request): Response
     {
