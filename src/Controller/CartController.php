@@ -110,4 +110,61 @@ final class CartController extends AbstractController
         return $this->redirectToRoute('cart');
     }
 
+    #[Route('/cart/addQt', name: 'addQt', methods: 'POST')]
+    public function addQt(EntityManagerInterface $em, string $uid): Response
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+        
+        $article = $em->getRepository(Article::class)->findOneBy(['uid' => $uid]);
+        $item = $em->getRepository(Cart::class)->findOneBy([
+            'articleID' => $article,
+            'user' => $user
+        ]);
+
+        $stock = $article->getStock();
+        
+        if ($stock > 0) {
+            //ici on enable le bouton - qui permet d'appeler removeQt
+            $item->setQuantity($item->getQuantity() + 1);
+            $stock->setNbStock($stock->getNbStock()-1);
+            $em->persist($item, $stock);
+            $em->flush();
+        } else {
+            //ici on disable le bouton + qui permet d'appeler addQt pour empecher l'utilisateur de rajouter au panier plus d'item que le stock dispo
+        }
+    
+        
+        return $this->redirectToRoute('cart');
+    }
+
+    #[Route('/cart/removeQt', name: 'removeQt', methods: 'POST')]
+    public function removeQt(EntityManagerInterface $em, string $uid): Response
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+        
+        $article = $em->getRepository(Article::class)->findOneBy(['uid' => $uid]);
+        $item = $em->getRepository(Cart::class)->findOneBy([
+            'articleID' => $article,
+            'user' => $user
+        ]);
+
+        $stock = $article->getStock();
+        
+        if ($item->getQuantity() > 1) {
+            $item->setQuantity($item->getQuantity() - 1);
+            $stock->setNbStock($stock->getNbStock()-1);
+                //ici on enabled le bouton + qui permet d'appeler addQt
+            $em->persist($item, $stock);
+        } else {
+            //ici on disable le bouton - qui permet d'appeler removeQt pour qu'il y ai au moins toujours 1 en quantité
+        }
+
+        $em->flush();
+        
+        
+        return $this->redirectToRoute('cart');
+    }
+
 }

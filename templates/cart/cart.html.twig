@@ -37,6 +37,17 @@
                                         </div>
                                     </div>
                                     <div class="cart-item-actions">
+                                        <form action="{{ path('removeQt', { 'uid': cart.articleID.uid }) }}" method="post">
+                                            <button type="submit" >
+                                                -
+                                            </button>
+                                        </form>
+                                        <p>{{cart.quantity}}</p>
+                                        <form action="{{ path('addQt', { 'uid': cart.articleID.uid }) }}" method="post">
+                                            <button type="submit">
+                                                +
+                                            </button>
+                                        </form>
                                         <form action="{{ path('RemoveItem', { 'uid': cart.articleID.uid , 'nb' : cart.quantity}) }}" method="post">
                                             <button type="submit" class="remove-button">
                                                 <i class="fas fa-trash"></i>
