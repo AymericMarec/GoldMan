@@ -26,10 +26,8 @@ final class DetailController extends AbstractController
         $user = $this->getUser();
         if(!$user){
             $editable = false;
-            $favorite = false;
         }else if($article->getCreatorID()->getId() == $user->getId() || in_array("ROLE_ADMIN",$user->getRoles())){
             $editable = true;
-            $favorite = false;
         }else {
             $editable = false;
         }
@@ -58,11 +56,20 @@ final class DetailController extends AbstractController
             $this->addFlash('error', 'Vous ne pouvez pas ajouter votre propre article au panier.');
             return $this->redirectToRoute('app_detail', ['uid' => $uid]);
         }
+        $stock = $article->getStock();
+        if($stock <= 0){
+            $this->addFlash('error', 'L\'article n\'est plus en stock');
+            return $this->redirectToRoute('app_detail', ['uid' => $uid]);
+        }
+
 
         $cart = new Cart();
         $cart->setArticleID($article);
         $cart->setUserID($user);
         $cart->setQuantity(1);
+
+        $stock->setNbStock($stock->getNbStock()-1);
+        $entityManager->persist($stock);
 
         $entityManager->persist($cart);
         $entityManager->flush();
