@@ -14,7 +14,7 @@
     <main class="detail-page">
         <div class="detail-container">
             <div class="article-image">
-                <img class="pdp"src="{{ asset('uploads/images/articles/' ~ article.image) }}" alt="{{ article.name }}">
+                <img class="pdp" src="{{ asset('uploads/images/articles/' ~ article.image) }}" alt="{{ article.name }}">
             </div>
 
             <div class="article-info">
@@ -23,13 +23,16 @@
                 </h1>
 
                 <div class="article-meta">
-                    <p>{{ 'published'|trans({}, 'index_page')|raw }}{{ article.publicationDate|date('d/m/Y') }}</p>
-                    <div class="seller-info">
-                        <div class="seller-image">
-                        <a href="/account?uid={{ app.user.uid }}"><img src="{{ asset('uploads/images/profilPicture/' ~ app.user.profilePicture) }}" ></a>
+                    <p class="publication-date">{{ 'published'|trans({}, 'index_page')|raw }}{{ article.publicationDate|date('d/m/Y') }}</p>
+                </div>
+
+                <div class="author-info">
+                    <a href="/account?uid={{ article.CreatorID.uid }}" class="author-link">
+                        <div class="author-image">
+                            <img src="{{ asset('uploads/images/profilPicture/' ~ article.CreatorID.profilePicture) }}" class="author-avatar">
                         </div>
-                        <p>{{ 'by'|trans({}, 'index_page')|raw }}{{ article.CreatorID.username }}</p>
-                    </div>
+                        <p class="author-name">{{ 'by'|trans({}, 'index_page')|raw }}{{ article.CreatorID.username }}</p>
+                    </a>
                 </div>
 
                 <div class="article-description">
