@@ -1,0 +1,36 @@
+validate_goldman:
+  "GOLDMAN - Order validation"
+validate:
+  "<h1>Finalizing the order</h1>"
+information:
+  “Enter your delivery information”
+address:
+  "<label>Delivery address</label>"
+name_address:
+  "123 rue of the peace"
+city:
+  "<label>City</label>"
+name_city:
+  "New York"
+postal:
+  "<label>Zip Code</label>"
+order:
+  "<h3>Order summary</h3>"
+see:
+  "<span>Total articles</span>"
+delivery:
+  "<span>Delivery costs</span>"
+free:
+  "<span>Free</span>"
+pay:
+  <span>Total to pay</span>
+confirm:
+  "Confirm order"
+return:
+  "Back to cart"
+insufficient:
+  "<h2>Insufficient balance</h2>"
+error:
+  "<p>Your current balance does not allow you to complete this purchase.</p>"
+add:
+  "Add funds"

@@ -1,0 +1,28 @@
+admin_goldman:
+  "GOLDMAN - Administration"
+admin:
+  <h1>Administration GOLDMAN</h1>
+text1:
+  "<p>Gérez les utilisateurs et les articles de votre boutique</p>"
+user_management:
+  "Gestion des Utilisateurs"
+text2:
+  "Gérez les comptes utilisateurs, les droits administrateurs et les suppressions"
+article__management:
+  "Gestion des Articles"
+text3:
+  "Supervisez tous les articles en vente, modérez et supprimez si nécessaire"
+admin_user_goldman:
+  "GOLDMAN - Administration des utilisateurs"
+delete:
+  "Retirer Admin"
+add:
+  "Ajouter Admin"
+delete_button:
+  "Supprimer"
+admin_article_goldman:
+  "GOLDMAN - Administration des articles"
+see:
+  "Voir"
+text4:
+  "<p>Aucun article n'est disponible pour le moment.</p>"

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}GOLDMAN - Mon Panier{% endblock %}
+{% block title %}{{ 'cart_goldman'|trans({}, 'cart_page')|raw }}{% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/header.css') }}">
@@ -14,9 +14,9 @@
     <main class="account-page">
         <div class="account-container">
             <div class="account-header">
-                <h1>Mon Panier</h1>
+                {{ 'my_cart'|trans({}, 'cart_page')|raw }}
                 {% if carts is not empty %}
-                    <p class="subtitle">{{ carts|length }} article{% if carts|length > 1 %}s{% endif %} dans votre panier</p>
+                    <p class="subtitle">{{ carts|length }} article{% if carts|length > 1 %}s{% endif %}{{ 'cart'|trans({}, 'cart_page')|raw }}</p>
                 {% endif %}
             </div>
 
@@ -48,40 +48,40 @@
                         <div class="cart-summary">
                             <div class="summary-details">
                                 <div class="summary-row">
-                                    <span>Sous-total</span>
+                                    {{ 'subtotal'|trans({}, 'cart_page')|raw }}
                                     <span>{{ total }}€</span>
                                 </div>
                                 <div class="summary-row">
-                                    <span>Frais de livraison</span>
-                                    <span>Gratuit</span>
+                                    {{ 'delivery_costs'|trans({}, 'cart_page')|raw }}
+                                    {{ 'free'|trans({}, 'cart_page')|raw }}
                                 </div>
                                 <div class="summary-total">
-                                    <span>Total</span>
+                                    {{ 'total'|trans({}, 'cart_page')|raw }}
                                     <span>{{ total }}€</span>
                                 </div>
                             </div>
-                            <a href="/cart/validate" class="checkout-button">
-                                <i class="fas fa-lock"></i> Procéder au paiement
+                            <a href="{{ path('validate') }}" class="checkout-button">
+                                <i class="fas fa-lock"></i> {{ 'payment'|trans({}, 'cart_page')|raw }}
                             </a>
                         </div>
                     </section>
                 {% else %}
                     <div class="empty-cart">
                         <i class="fas fa-shopping-cart"></i>
-                        <h2>Votre panier est vide</h2>
-                        <p>Découvrez nos magnifiques bijoux et commencez votre collection</p>
+                        {{ 'empty_cart'|trans({}, 'cart_page')|raw }}
+                        {{ 'discover'|trans({}, 'cart_page')|raw }}
                         <a href="/" class="browse-button">
-                            <i class="fas fa-gem"></i> Voir nos articles
+                            <i class="fas fa-gem"></i> {{ 'see'|trans({}, 'cart_page')|raw }}
                         </a>
                     </div>
                 {% endif %}
             {% else %}
                 <div class="empty-cart">
                     <i class="fas fa-user-lock"></i>
-                    <h2>Connectez-vous pour accéder à votre panier</h2>
-                    <p>Vous devez être connecté pour voir et gérer votre panier</p>
+                    {{ 'log1'|trans({}, 'cart_page')|raw }}
+                    {{ 'log2'|trans({}, 'cart_page')|raw }}
                     <a href="/login" class="browse-button">
-                        <i class="fas fa-sign-in-alt"></i> Se connecter
+                        <i class="fas fa-sign-in-alt"></i> {{ 'log_in'|trans({}, 'cart_page')|raw }}
                     </a>
                 </div>
             {% endif %}

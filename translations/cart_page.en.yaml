@@ -1,0 +1,28 @@
+cart_goldman:
+  "GOLDMAN - My Cart"
+my_cart:
+  "<h1>My Cart</h1>"
+cart:
+  " in your cart"
+subtotal:
+  "<span>Subtotal</span>"
+delivery_costs:
+  "<span>Delivery costs</span>"
+free:
+  "<span>Free</span>"
+total:
+  "<span>Total</span>"
+payment:
+  "Proceed to payment"
+empty_cart:
+  "<h2>Your cart is empty</h2>"
+discover:
+  "<p>Discover our magnificent jewelry and start your collection</p>"
+see:
+  "See our articles"
+log1:
+  "<h2>Log in to access your cart</h2>"
+log2:
+  "<p>You must be logged in to view and manage your cart</p>"
+login:
+  "Log in"

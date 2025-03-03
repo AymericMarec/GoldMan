@@ -23,12 +23,12 @@
                 </h1>
 
                 <div class="article-meta">
-                    <p>Publié le {{ article.publicationDate|date('d/m/Y') }}</p>
+                    <p>{{ 'published'|trans({}, 'index_page')|raw }}{{ article.publicationDate|date('d/m/Y') }}</p>
                     <div class="seller-info">
                         <div class="seller-image">
                         <a href="/account?uid={{ app.user.uid }}"><img src="{{ asset('uploads/images/profilPicture/' ~ app.user.profilePicture) }}" ></a>
                         </div>
-                        <p>Par {{ article.CreatorID.username }}</p>
+                        <p>{{ 'by'|trans({}, 'index_page')|raw }}{{ article.CreatorID.username }}</p>
                     </div>
                 </div>
 
@@ -44,28 +44,28 @@
                 <div class="article-stock">
                     <h3>Stock</h3>
                     {% if article.stock %}
-                        <p>Quantité disponible : {{ article.stock.nbStock }}</p>
+                        <p>{{ 'available'|trans({}, 'index_page')|raw }}{{ article.stock.nbStock }}</p>
                     {% else %}
-                        <p>Stock non disponible.</p>
+                        <p>{{ 'not_available'|trans({}, 'index_page')|raw }}</p>
                     {% endif %}
                 </div>
 
                 <div class="article-actions">
                     {% if app.user and app.user != article.creatorID %}
                         <form action="{{ path('app_add_to_cart', {uid: article.uid}) }}" method="POST">
-                            <button type="submit" class="add-to-cart-button">Ajouter au panier</button>
+                            <button type="submit" class="add-to-cart-button">{{ 'add_cart'|trans({}, 'index_page')|raw }}</button>
                         </form>
                     {% elseif app.user %}
-                        <p class="warning-message">Vous ne pouvez pas ajouter votre propre article au panier.</p>
+                        <p class="warning-message">{{ 'warning'|trans({}, 'index_page')|raw }}</p>
                     {% endif %}
 
                     {% if editable %}
                         <div class="edit-actions">
                             <button id="save" class="save-button" style="display:none;" data-uid={{article.uid}} onclick="Save()">
-                                <i class="fas fa-save"></i> Sauvegarder
+                                <i class="fas fa-save"></i> {{ 'save'|trans({}, 'index_page')|raw }}
                             </button>
                             <button id="delete" class="delete-button" data-uid={{article.uid}} onclick="Delete(this)">
-                                <i class="fas fa-trash"></i> Supprimer
+                                <i class="fas fa-trash"></i> {{ 'delete'|trans({}, 'index_page')|raw }}
                             </button>
                         </div>
                     {% endif %}

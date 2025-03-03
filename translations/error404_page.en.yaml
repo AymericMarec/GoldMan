@@ -1,0 +1,11 @@
+error_goldman:
+  "GOLDMAN - Page not found"
+not_found:
+  "Page not found"
+text:
+  "The page you are looking for appears to have disappeared from our vault.
+  Perhaps it has been moved or no longer exists."
+return:
+  "Return to home"
+previous:
+  "Previous page"

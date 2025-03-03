@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}GOLDMAN - Validation de commande{% endblock %}
+{% block title %}{{ 'validate_goldman'|trans({}, 'validate_page')|raw }}{% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/header.css') }}">
@@ -15,42 +15,42 @@
         <div class="account-container">
             {% if canBuy %}
                 <div class="account-header">
-                    <h1>Finalisation de la commande</h1>
-                    <p class="subtitle">Renseignez vos informations de livraison</p>
+                    {{ 'validate'|trans({}, 'validate_page')|raw }}
+                    <p class="subtitle">{{ 'information'|trans({}, 'validate_page')|raw }}</p>
                 </div>
 
                 <section class="account-section">
                     <form method="post" class="checkout-form">
                         <div class="form-group">
-                            <label>Adresse de livraison</label>
-                            <input type="text" name="adress" required placeholder="123 rue de la Paix">
+                            {{ 'address'|trans({}, 'validate_page')|raw }}
+                            <input type="text" name="adress" required placeholder={{ 'name_address'|trans({}, 'validate_page')|raw }}>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
-                                <label>Ville</label>
-                                <input type="text" name="city" required placeholder="Paris">
+                                <label>{{ 'city'|trans({}, 'validate_page')|raw }}</label>
+                                <input type="text" name="city" required placeholder={{ 'name_city'|trans({}, 'validate_page')|raw }}>
                             </div>
 
                             <div class="form-group">
-                                <label>Code Postal</label>
+                                {{ 'postal'|trans({}, 'validate_page')|raw }}
                                 <input type="number" name="postalCode" required placeholder="75000">
                             </div>
                         </div>
 
                         <div class="order-summary">
-                            <h3>Récapitulatif de la commande</h3>
+                            {{ 'order'|trans({}, 'validate_page')|raw }}
                             <div class="summary-details">
                                 <div class="summary-row">
-                                    <span>Total des articles</span>
+                                    {{ 'see'|trans({}, 'validate_page')|raw }}
                                     <span>{{ total }}€</span>
                                 </div>
                                 <div class="summary-row">
-                                    <span>Frais de livraison</span>
-                                    <span>Gratuit</span>
+                                    {{ 'delivery'|trans({}, 'validate_page')|raw }}
+                                    {{ 'free'|trans({}, 'validate_page')|raw }}
                                 </div>
                                 <div class="summary-total">
-                                    <span>Total à payer</span>
+                                    {{ 'pay'|trans({}, 'validate_page')|raw }}
                                     <span>{{ total }}€</span>
                                 </div>
                             </div>
@@ -58,10 +58,10 @@
 
                         <div class="form-actions">
                             <button type="submit" class="submit-button">
-                                <i class="fas fa-check"></i> Confirmer la commande
+                                <i class="fas fa-check"></i> {{ 'confirm'|trans({}, 'validate_page')|raw }}
                             </button>
                             <a href="/cart" class="cancel-button">
-                                <i class="fas fa-arrow-left"></i> Retour au panier
+                                <i class="fas fa-arrow-left"></i> {{ 'return'|trans({}, 'validate_page')|raw }}
                             </a>
                         </div>
                     </form>
@@ -71,14 +71,14 @@
                     <div class="error-icon">
                         <i class="fas fa-exclamation-circle"></i>
                     </div>
-                    <h2>Solde insuffisant</h2>
-                    <p>Votre solde actuel ne permet pas de finaliser cet achat.</p>
+                   {{ 'insufficient'|trans({}, 'validate_page')|raw }}
+                    {{ 'error'|trans({}, 'validate_page')|raw }}
                     <div class="error-actions">
-                        <a href="/account" class="primary-button">
-                            <i class="fas fa-wallet"></i> Ajouter des fonds
+                        <a href="{{ path('AccountPage') }}" class="primary-button">
+                            <i class="fas fa-wallet"></i> {{ 'add'|trans({}, 'validate_page')|raw }}
                         </a>
-                        <a href="/cart" class="secondary-button">
-                            <i class="fas fa-arrow-left"></i> Retour au panier
+                        <a href="{{ path('cart') }}" class="secondary-button">
+                            <i class="fas fa-arrow-left"></i> {{ 'return'|trans({}, 'validate_page')|raw }}
                         </a>
                     </div>
                 </div>

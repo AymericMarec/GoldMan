@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}GOLDMAN - Tous les Articles{% endblock %}
+{% block title %}{{ 'article_goldman'|trans({}, 'index_page')|raw }}{% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/header.css') }}">
@@ -13,9 +13,9 @@
 
     <main class="articles-page">
         <div class="search-section">
-            <h1>Tous les Articles</h1>
+            {{ 'all'|trans({}, 'index_page')|raw }}
             <div class="search-container">
-                <input type="text" id="search" name="search" placeholder="Rechercher un article..." class="search-input">
+                <input type="text" id="search" name="search" placeholder={{ 'search'|trans({}, 'index_page')|raw }} class="search-input">
                 <button onclick="Search(this)" class="search-button">
                     <i class="fas fa-search"></i>
                 </button>
@@ -23,14 +23,14 @@
             
             <form method="post" class="filter-controls">
                 <div class="price-filter">
-                    <label>Prix minimum</label>
+                    {{ 'minimum'|trans({}, 'index_page')|raw }}
                     <div class="range-container">
                         <input type="range" id="minPrice" min="0" max="100000" step="1000" value="0" class="price-range" oninput="this.nextElementSibling.value = this.value + ' €'" name="minPrice">
                         <output class="price-value">0 €</output>
                         <div class="info-tooltip">
                             <i class="fas fa-question-circle"></i>
                             <div class="tooltip-content">
-                                GOLDMAN est une plateforme de luxe. L'absence d'un filtre de prix maximum est volontaire : si votre budget est limité, nous vous invitons à visiter d'autres boutiques.
+                                {{ 'poor_filter'|trans({}, 'index_page')|raw }}
                             </div>
                         </div>
                     </div>
@@ -38,14 +38,14 @@
                 
                 <div class="sort-container">
                     <select id="priceSort" name="priceSort" class="sort-select">
-                        <option value="" disabled selected>Trier par prix</option>
-                        <option value="DESC">Prix décroissant</option>
-                        <option value="ASC">Prix croissant</option>
+                        <option value="" disabled selected>{{ 'sort'|trans({}, 'index_page')|raw }}</option>
+                        <option value="DESC">{{ 'descending'|trans({}, 'index_page')|raw }}</option>
+                        <option value="ASC">{{ 'increasing'|trans({}, 'index_page')|raw }}</option>
                     </select>
                     <i class="fas fa-chevron-down select-icon"></i>
                 </div>
 
-                <input type="submit" class="apply-button" value="Appliquer">
+                <input type="submit" class="apply-button" value={{ 'apply'|trans({}, 'index_page')|raw }}>
             </form>
         </div>
 
@@ -61,12 +61,12 @@
                         <h3>{{ article.name }}</h3>
                         <p class="article-price">{{ article.price }} €</p>
                         <p class="article-date">{{ article.publicationDate|date('d/m/Y') }}</p>
-                        <a href="{{ path('app_detail', {'uid': article.uid}) }}" class="view-button">Découvrir</a>
+                        <a href="{{ path('app_detail', {'uid': article.uid}) }}" class="view-button">{{ 'discover'|trans({}, 'index_page')|raw }}</a>
                     </div>
                 </div>
             {% else %}
                 <div class="no-results">
-                    <p>Aucun article trouvé</p>
+                    {{ 'not_results'|trans({}, 'index_page')|raw }}
                 </div>
             {% endfor %}
         </div>
@@ -74,13 +74,13 @@
         <div class="pagination">
             {% if visible_first %}
                 <a href="{{ path('article_view', { 'id' : id - 1 })}}" class="page-link">
-                    <i class="fas fa-chevron-left"></i> Précédent
+                    <i class="fas fa-chevron-left"></i> {{ 'previous'|trans({}, 'index_page')|raw }}
                 </a>
             {% endif %}
             
             {% if visible_endless %}
                 <a href="{{ path('article_view', { 'id' : id + 1 })}}" class="page-link">
-                    Suivant <i class="fas fa-chevron-right"></i>
+                    {{ 'next'|trans({}, 'index_page')|raw }} <i class="fas fa-chevron-right"></i>
                 </a>
             {% endif %}
         </div>
