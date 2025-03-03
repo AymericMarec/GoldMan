@@ -12,6 +12,9 @@ Goldman est un site d'e-commerce de luxe, développé avec Symfony , chacun peut
 
 ## Installation
 
+Remplissez d'abord le fichier .env.local avec vos identifiants mysql
+pensez a remplir la DATABASE_URL et changeant user ,password et database_name
+
 ### 1. Démarrer Docker
 ```sh
 docker compose up -d
@@ -19,6 +22,7 @@ docker compose up -d
 
 ### 2. Initialiser la base de données
 ```sh
+composer install
 php bin/console doctrine:database:drop --force --if-exists
 php bin/console doctrine:database:create
 php bin/console doctrine:schema:create
