@@ -15,22 +15,37 @@
         <div class="account-container">
             <div class="account-header">
                 <div class="profile-image">
-                        <img src="{{ asset('uploads/images/profilPicture/' ~ user.profilePicture) }}" >
+                    {% if user.profilePicture %}
+                        <img src="{{ asset('uploads/images/profilPicture/' ~ user.profilePicture) }}" alt="Photo de profil">
+                    {% else %}
+                        <img src="{{ asset('images/default-avatar.png') }}" alt="Photo de profil par défaut">
+                    {% endif %}
                 </div>
                 <h1>{{ user.username }}</h1>
                 <p class="user-email">{{ user.email }}</p>
             </div>
 
             <section class="account-section">
-                <h2>{{ 'publish'|trans({}, 'login_page')|raw }}{{ user.username }}</h2>
+                <div class="section-header">
+                    <h2>{{ 'Articles'|trans({}, 'login_page')|raw }}</h2>
+                </div>
                 <div class="articles-grid">
                     {% for article in articles %}
                         <div class="article-card">
-                            <img src="{{ asset('images/' ~ article.image) }}" alt="{{ article.name }}">
+                            <div class="article-image">
+                                <img src="{{ asset('uploads/images/articles/' ~ article.image) }}" alt="{{ article.name }}">
+                                <div class="article-overlay">
+                                    <a href="{{ path('app_detail', {'uid': article.uid}) }}" class="view-button">
+                                        <i class="fas fa-eye"></i> {{ 'view'|trans({}, 'login_page')|raw }}
+                                    </a>
+                                </div>
+                            </div>
                             <div class="article-info">
                                 <h3>{{ article.name }}</h3>
-                                <p class="price">{{ article.price }}€</p>
-                                <a href="{{ path('app_detail', {'uid': article.uid}) }}" class="view-button">{{ 'view'|trans({}, 'login_page')|raw }}</a>
+                                <div class="article-meta">
+                                    <p class="price">{{ article.price }}€</p>
+                                    <p class="status">{{ 'for_sale'|trans({}, 'index_page')|raw }}</p>
+                                </div>
                             </div>
                         </div>
                     {% else %}

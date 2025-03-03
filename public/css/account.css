@@ -18,8 +18,8 @@
 
 .account-header {
     text-align: center;
-    padding: 2rem;
     margin-bottom: 3rem;
+    padding: 2rem;
     background: rgba(255, 255, 255, 0.02);
     border-radius: 8px;
     border: 1px solid #222;
@@ -35,8 +35,9 @@
 }
 
 .profile-image {
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 1.5rem;
     border-radius: 50%;
     overflow: hidden;
     border: 3px solid #d4af37;
@@ -46,6 +47,13 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.account-header h1 {
+    color: #d4af37;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .user-info {
@@ -554,45 +562,39 @@ button:hover {
 
 /* Style pour les articles */
 .section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     margin-bottom: 2rem;
+    border-bottom: 1px solid #222;
+    padding-bottom: 1rem;
 }
 
-.new-article-button {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.8rem 1.5rem;
-    background: #d4af37;
-    color: #000;
-    border: none;
-    border-radius: 4px;
-    text-decoration: none;
+.section-header h2 {
+    color: #d4af37;
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1rem;
-    transition: all 0.3s ease;
+    font-size: 1.8rem;
 }
 
-.new-article-button:hover {
-    background: #c4a032;
-    transform: translateY(-2px);
+.articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
 }
 
 .article-card {
-    position: relative;
-    background: #111;
+    background: rgba(255, 255, 255, 0.02);
     border: 1px solid #222;
     border-radius: 8px;
     overflow: hidden;
     transition: all 0.3s ease;
 }
 
+.article-card:hover {
+    transform: translateY(-5px);
+    border-color: #d4af37;
+}
+
 .article-image {
     position: relative;
-    width: 100%;
-    height: 250px;
+    height: 200px;
     overflow: hidden;
 }
 
@@ -600,51 +602,40 @@ button:hover {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: all 0.5s ease;
 }
 
 .article-overlay {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.7);
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    gap: 1rem;
+    justify-content: center;
     opacity: 0;
-    transition: all 0.3s ease;
+    transition: opacity 0.3s ease;
 }
 
 .article-card:hover .article-overlay {
     opacity: 1;
 }
 
-.article-card:hover .article-image img {
-    transform: scale(1.1);
-}
-
-.view-button, .edit-article-button {
+.view-button {
+    background: #d4af37;
+    color: #000;
     padding: 0.8rem 1.5rem;
-    background: transparent;
-    border: 1px solid #d4af37;
-    color: #d4af37;
     border-radius: 4px;
     text-decoration: none;
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
     transition: all 0.3s ease;
 }
 
-.view-button:hover, .edit-article-button:hover {
-    background: #d4af37;
-    color: #000;
+.view-button:hover {
+    background: #c4a032;
+    transform: translateY(-2px);
 }
 
 .article-info {
@@ -655,36 +646,25 @@ button:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 0.5rem;
+    margin-top: 1rem;
+}
+
+.price {
+    color: #d4af37;
+    font-size: 1.2rem;
+    font-weight: 600;
 }
 
 .status {
     color: #28a745;
     font-size: 0.9rem;
-    padding: 0.3rem 0.6rem;
-    background: rgba(40, 167, 69, 0.1);
-    border-radius: 3px;
 }
 
 .no-articles {
     grid-column: 1 / -1;
     text-align: center;
-    padding: 4rem 2rem;
-    background: rgba(255,255,255,0.02);
-    border-radius: 8px;
-    border: 1px dashed #333;
-}
-
-.no-articles i {
-    font-size: 3rem;
     color: #666;
-    margin-bottom: 1rem;
-}
-
-.no-articles p {
-    color: #666;
-    margin-bottom: 2rem;
-    font-size: 1.1rem;
+    padding: 2rem;
 }
 
 /* Styles pour la page de vente */

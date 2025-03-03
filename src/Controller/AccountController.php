@@ -15,27 +15,14 @@ use App\Repository\UserRepository;
 #[Route('{_locale<%app.supported_locales%>}')]
 final class AccountController extends AbstractController{
     #[Route('/account', name: 'AccountPage',methods:'GET')]
-    public function index(Request $request,UserRepository $userRepository): Response
+    public function ShowUser(Request $request,UserRepository $userRepository): Response
     {
-        $userToShow = $request->query->get('uid');
+        /** @var User $user */
         $user = $this->getUser();
         //if user is not logged in
         if (!$user) {
             return $this->redirectToRoute('login');
         }
-        //if the user goes on his page
-        if($userToShow == null){
-            return $this->ShowUser();
-        }else {
-            return $this->ShowOtherUser($userToShow, $userRepository);
-        }
-    }
-
-
-    public function ShowUser():Response{
-        /** @var User $user */
-        $user = $this->getUser();
-
         $articles = $user->getArticles();
         $bills = $user->getInvoices();
         //Load Page with UserInfo
@@ -45,7 +32,9 @@ final class AccountController extends AbstractController{
             'bills' =>$bills,
         ]);
     }
-    public function ShowOtherUser($uid,UserRepository $userRepository):Response{
+    #[Route('/account/{uid}', name: 'OtherAcountPage',methods:'GET')]
+    public function ShowOtherUser(Request $request,UserRepository $userRepository,string $uid): Response
+    {
         $user = $userRepository->findOneBy(['uid' => $uid]);
         $articles = $user->getArticles();
         //Load Page with OtherUserInfo
@@ -55,13 +44,16 @@ final class AccountController extends AbstractController{
         ]);
     }
 
+
+
+
     #[Route('/account', name: 'ChangeInfo',methods:'POST')]
     public function ChangeInfo(Request $request,EntityManagerInterface $entityManager,UserPasswordHasherInterface $passwordHasher): Response
     {
         /** @var User $user */
         $user = $this->getUser();
         if (!$user) {
-            return $this->ShowUser();
+            return $this->redirectToRoute("AccountPage");
         }
         $formType = $request->request->get('type');
         switch ($formType) {
@@ -91,6 +83,6 @@ final class AccountController extends AbstractController{
         }
         $entityManager->persist($user);
         $entityManager->flush();
-        return $this->ShowUser();
+        return $this->redirectToRoute("AccountPage");
     }
 }

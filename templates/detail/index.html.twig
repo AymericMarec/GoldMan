@@ -27,7 +27,7 @@
                 </div>
 
                 <div class="author-info">
-                    <a href="/account?uid={{ article.CreatorID.uid }}" class="author-link">
+                    <a href="{{ path('OtherAcountPage',{uid:article.CreatorID.uid} )}}" class="author-link">
                         <div class="author-image">
                             <img src="{{ asset('uploads/images/profilPicture/' ~ article.CreatorID.profilePicture) }}" class="author-avatar">
                         </div>
