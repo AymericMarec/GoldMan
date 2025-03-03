@@ -957,10 +957,20 @@ textarea:focus {
     border: 1px dashed #333;
 }
 
-.empty-cart i {
-    font-size: 3rem;
+.empty-cart-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.empty-cart-icon i {
+    font-size: 2.5rem;
     color: #d4af37;
-    margin-bottom: 1.5rem;
 }
 
 .empty-cart h2 {
@@ -973,12 +983,17 @@ textarea:focus {
 .empty-cart p {
     color: #999;
     margin-bottom: 2rem;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .browse-button {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.8rem;
     padding: 1rem 2rem;
     background: #d4af37;
     color: #000;
@@ -993,6 +1008,10 @@ textarea:focus {
 .browse-button:hover {
     background: #c4a032;
     transform: translateY(-2px);
+}
+
+.browse-button i {
+    color: #000;
 }
 
 @media (max-width: 768px) {

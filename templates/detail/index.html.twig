@@ -11,6 +11,13 @@
 {% block body %}
     {% include 'partials/header.html.twig' %}
 
+    <div id="notification" class="notification" style="display: none;">
+        <div class="notification-content">
+            <i class="fas fa-check-circle"></i>
+            <p>Article ajouté au panier avec succès !</p>
+        </div>
+    </div>
+
     <main class="detail-page">
         <div class="detail-container">
             <div class="article-image">
@@ -55,7 +62,7 @@
 
                 <div class="article-actions">
                     {% if app.user and app.user != article.creatorID %}
-                        <form action="{{ path('app_add_to_cart', {uid: article.uid}) }}" method="POST">
+                        <form action="{{ path('app_add_to_cart', {uid: article.uid}) }}" method="POST" id="add-to-cart-form">
                             <button type="submit" class="add-to-cart-button">{{ 'add_cart'|trans({}, 'index_page')|raw }}</button>
                         </form>
                     {% elseif app.user %}
@@ -82,4 +89,34 @@
 
 {% block javascripts %}
     <script src="{{ asset('js/editArticleGestion.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('add-to-cart-form');
+            const notification = document.getElementById('notification');
+
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    fetch(this.action, {
+                        method: 'POST',
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        }
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            // Afficher la notification
+                            notification.style.display = 'flex';
+                            
+                            // Cacher la notification après 3 secondes
+                            setTimeout(() => {
+                                notification.style.display = 'none';
+                            }, 3000);
+                        }
+                    });
+                });
+            }
+        });
+    </script>
 {% endblock %}

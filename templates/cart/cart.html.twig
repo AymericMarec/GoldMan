@@ -67,11 +67,13 @@
                     </section>
                 {% else %}
                     <div class="empty-cart">
-                        <i class="fas fa-shopping-cart"></i>
-                        {{ 'empty_cart'|trans({}, 'cart_page')|raw }}
-                        {{ 'discover'|trans({}, 'cart_page')|raw }}
-                        <a href="/" class="browse-button">
-                            <i class="fas fa-gem"></i> {{ 'see'|trans({}, 'cart_page')|raw }}
+                        <div class="empty-cart-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <h2>Votre panier est vide</h2>
+                        <p>Découvrez les articles proposés par nos vendeurs et commencez vos achats.</p>
+                        <a href="{{ path('article_view', {'id': 1}) }}" class="browse-button">
+                            <i class="fas fa-gem"></i> Découvrir les articles
                         </a>
                     </div>
                 {% endif %}
