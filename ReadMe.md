@@ -12,6 +12,8 @@ Goldman est un site d'e-commerce de luxe, développé avec Symfony , chacun peut
 
 ## Installation
 
+Remplissez d'abord le fichier .env.test
+
 ### 1. Démarrer Docker
 ```sh
 docker compose up -d
