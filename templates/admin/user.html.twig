@@ -13,9 +13,13 @@
 
     <main class="admin-page">
         <div class="admin-container">
-            <div class="admin-header">
-                {{ 'user_management'|trans({}, 'admin_page')|raw }}
-            </div>
+            
+                <div class="admin-header">
+                    <h1>
+                    {{ 'user_management'|trans({}, 'admin_page')|raw }}
+                    </h1>
+                </div>
+            
 
             <div class="users-grid">
                 {% for user in users %}

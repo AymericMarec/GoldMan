@@ -37,3 +37,5 @@ symfony server:start
 ### 4. Accéder à l'application
 
 Rendez-vous sur http://localhost:8000.
+
+Si vous etes connecté en tant qu'admin ( premier utilisateur ) , vous aurez accès a la page /admin pour modifier des utilisateurs

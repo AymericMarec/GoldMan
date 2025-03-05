@@ -33,7 +33,7 @@ function Save() {
     const price = document.getElementById('price').textContent;
     const uid = document.getElementById('save').getAttribute('data-uid');
 
-    fetch(`/edit/${uid}`, {
+    fetch(`/fr/edit/${uid}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ function Save() {
 function Delete(button) {
     if(confirm('Êtes-vous sûr de vouloir supprimer cet article ?')) {
         const uid = button.getAttribute('data-uid');
-        fetch(`/edit/${uid}`, {
+        fetch(`/fr/edit/${uid}`, {
             method: 'DELETE'
         }).then(response => {
             if(response.ok) {

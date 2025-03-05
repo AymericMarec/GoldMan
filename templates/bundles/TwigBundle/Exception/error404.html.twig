@@ -141,7 +141,7 @@
                {{ 'text'|trans({}, 'error404_page')|raw }}
             </p>
             <div class="error-actions">
-                <a href="/" class="home-button">
+                <a href="{{ path('home') }}" class="home-button">
                     <i class="fas fa-home"></i>  {{ 'return'|trans({}, 'error404_page')|raw }} 
                 </a>
                 <a href="javascript:history.back()" class="back-button">

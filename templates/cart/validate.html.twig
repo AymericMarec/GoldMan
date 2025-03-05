@@ -60,7 +60,7 @@
                             <button type="submit" class="submit-button">
                                 <i class="fas fa-check"></i> {{ 'confirm'|trans({}, 'validate_page')|raw }}
                             </button>
-                            <a href="/cart" class="cancel-button">
+                            <a href="{{ path('cart') }}" class="cancel-button">
                                 <i class="fas fa-arrow-left"></i> {{ 'return'|trans({}, 'validate_page')|raw }}
                             </a>
                         </div>
